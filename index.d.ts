@@ -1,0 +1,6 @@
+declare module '*.png'
+declare module '*.jpg'
+declare module '*.jpeg'
+declare module '@types/react-redux'
+declare module 'i18n-js'
+declare module 'styled-components/native'

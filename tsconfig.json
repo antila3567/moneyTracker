@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+        "allowJs": true,
+        "allowSyntheticDefaultImports": true,
+        "allowUnreachableCode": false,
+        "esModuleInterop": true,
+        "isolatedModules": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "pretty": true,
+        "jsx": "react",
+        "lib": ["es6"],
+        "moduleResolution": "node",
+        "noEmit": true,
+        "strict": true,
+        "target": "esnext"
+    },
+    "exclude": [
+        "node_modules",
+        "babel.config.ts",
+        "metro.config.ts",
+        "jest.config.ts",
+        "__tests__/**/*-test.ts",
+        "src/**/*.spec.ts",
+    ],
+    "include": [
+        "src",
+        "index.d.ts"
+      ]
+}
