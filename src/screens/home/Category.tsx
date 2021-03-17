@@ -1,12 +1,17 @@
+import { Button } from 'native-base'
 import React from 'react'
-import { View, Text } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { View, Text, Alert, TouchableOpacity } from 'react-native'
 
 const Category = ({}) => {
     return (
-        <TouchableOpacity>
-            <Text style={{fontSize:35}}>Category</Text>
+        <View >
+        <TouchableOpacity >
+             <Text style={{fontSize:40}}>Settings</Text>
         </TouchableOpacity>
+            <Button onPress={() => Alert.alert('work')}>
+                <Text>Click Me!</Text>
+            </Button>
+        </View>
     )
 }
 

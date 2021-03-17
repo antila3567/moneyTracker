@@ -1,19 +1,36 @@
-import { Icon, Input, Item } from "native-base";
-import React, { useState } from "react";
-import { SafeAreaView, Text, TouchableOpacity, View, Image } from "react-native";
-import { useDispatch } from "react-redux";
-import { lightTheme, darkTheme } from "../../assets/styles/auth";
-import { useTypedSelector } from "../../hooks/useTypedSelector";
-import I18n from "../../localization/locale";
+import { Icon, Input, Item } from 'native-base';
+import React from 'react';
+import { SafeAreaView, Text, TouchableOpacity, View, Image } from 'react-native';
+import { lightTheme, darkTheme } from '../../assets/styles/auth';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import I18n from '../../localization/locale';
+import auth from '@react-native-firebase/auth';
+import { useActions } from "../../hooks/useActions";
 
-const Registration = ({navigation}:any) => {
-    const [secure, setSecure] = useState(true)
-    const dispatch = useDispatch()
-    const switchColor = useTypedSelector(state => state.switchTheme.theme)
-    const styles = switchColor ? lightTheme : { ...lightTheme, ...darkTheme };
+const Registration = () => {
+  // const expressionEmail = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+  const switchColor = useTypedSelector(state => state.switchTheme.theme);
+  const styles = switchColor ? lightTheme : { ...lightTheme, ...darkTheme };
+  const signUp = useTypedSelector(state => state.auth);
+  const {setUserEmail, setUserPassword, setUserError, switchSecure} = useActions();
   
-    const goToSignIn = () => {
-      navigation.navigate('SignIn')
+    const signUpNewUser = async() => {
+     if(signUp.email !== '' && signUp.password !== ''){
+      auth().createUserWithEmailAndPassword(signUp.email, signUp.password)
+      .catch(error => {
+        if (error.code === 'auth/email-already-in-use') {
+          setUserError(I18n.t('emailUse'))
+        }
+        if (error.code === 'auth/invalid-email') {
+          setUserError(I18n.t('invalidEmail'))
+        }
+        if (signUp.password.length < 6) {
+          setUserError(I18n.t('passValidation'))
+        }
+      });
+     } else {
+      setUserError(I18n.t('emptyFields'))
+     }
     }
   
     return (
@@ -26,24 +43,25 @@ const Registration = ({navigation}:any) => {
               <View>
                 <Item style={styles.loginInputs}>
                   <Icon style={styles.icons} active name='ios-person' />
-                  <Input style={styles.inputs} placeholder='username'/>
+                  <Input onChangeText={text => setUserEmail(text)} value={signUp.email} style={styles.inputs} placeholder={I18n.t('email')}/>
                 </Item>
                 <Item style={styles.loginInputs}>
                   <Icon style={styles.icons} active name='ios-key'/>
-                  <Input style={styles.inputs} placeholder='password' secureTextEntry={secure}/>
-                  <TouchableOpacity onPress={() => setSecure(!secure)}>
+                  <Input onChangeText={text => setUserPassword(text)} value={signUp.password} style={styles.inputs} placeholder={I18n.t('password')} secureTextEntry={signUp.secure}/>
+                  <TouchableOpacity onPress={() => switchSecure(!signUp.secure)}>
                     <Icon style={styles.icons} active name='eye' />
                   </TouchableOpacity>
                 </Item>
               </View>
+              {signUp.error ? <Text style={styles.errorMsg}>{signUp.error}</Text> : null}
               <View style={styles.loginButtons}>
-                <TouchableOpacity style={styles.signUpButton} onPress={() => goToSignIn()}>
+                <TouchableOpacity style={styles.signUpButton} onPress={() => signUpNewUser()}>
                   <Text style={styles.loginBtnText}>{I18n.t('signUp')}</Text>
                 </TouchableOpacity>
               </View>
           </View>
         </SafeAreaView>
     );
-}
+};
 
 export default Registration

@@ -1,10 +1,12 @@
-import { combineReducers } from "redux";
-import onboardingReducer from "./onboardingReducer";
-import switchThemeReducer from "./switchThemeReducer";
+import { combineReducers } from 'redux';
+import authReducer from './authReducer';
+import switchThemeReducer from './switchThemeReducer';
+import userReducer from './userReduce';
 
 export const rootReducer = combineReducers({
-    onboarding: onboardingReducer,
-    switchTheme: switchThemeReducer
+    auth: authReducer,
+    switchTheme: switchThemeReducer,
+    users: userReducer
 })
 
 export type RootState = ReturnType<typeof rootReducer>

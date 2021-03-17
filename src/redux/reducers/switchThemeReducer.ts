@@ -1,18 +1,12 @@
-import { SWITCH_THEME } from "../action/switchTheme";
-
-interface IInitState {
-    theme:boolean
-}
+import { IThemeActions, IInitState, switchActionTypes } from './../types/switchTheme';
 
 const init:IInitState = {
     theme: true
 }
 
-
-
-const switchThemeReducer = (state = init, action: any) => {
+const switchThemeReducer = (state = init, action: IThemeActions) => {
     switch (action.type) {
-        case SWITCH_THEME:
+        case switchActionTypes.SWITCH_THEME:
             return { ...state, theme: action.payload}
         default:
             return state;

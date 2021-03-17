@@ -97,6 +97,11 @@ export const lightTheme = StyleSheet.create({
     shadowColor: "#000",
     elevation: 10,
   },
+  errorMsg: {
+    textAlign:'center',
+    marginTop:5,
+    color:'red'
+  }
 });
 
 export const darkTheme = StyleSheet.create({

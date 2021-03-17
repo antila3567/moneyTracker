@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">moneyTrecker</string>
+    <string name="app_name">moneyTracker</string>
+    <string name="facebook_app_id">921592642011187</string>
+    <string name="fb_login_protocol_scheme">fb921592642011187</string>
 </resources>

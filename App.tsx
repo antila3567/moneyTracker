@@ -1,14 +1,7 @@
-import React from 'react'
-import { applyMiddleware, createStore } from 'redux';
-import { Provider } from 'react-redux'
-import { rootReducer } from './src/redux/reducers'
-import thunk from 'redux-thunk';
-import Navigation from './src/Navigation'
-
-const store = createStore(
-  rootReducer,
-  applyMiddleware(thunk)
-)
+import React from "react";
+import { Provider } from "react-redux";
+import Navigation from "./src/Navigation";
+import { store } from "./src/redux/store";
 
 const App = () => {
   return (

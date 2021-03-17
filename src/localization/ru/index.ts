@@ -7,4 +7,12 @@ export default {
     signUp:"зарегистрироватся",
     loginHelp:"войти через",
     forgotPass:"забыли пароль?",
+    email:"электронная почта",
+    username:"имя пользователя",
+    password:"пароль",
+    emailUse: "такой адрес уже существует",
+    invalidEmail: "некорректный эмейл",
+    emptyFields: "заполните все поля",
+    passValidation:"пароль должен быть больше шести символов",
+    wrongPass:"неправильный пароль",
   };
