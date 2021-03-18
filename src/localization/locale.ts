@@ -1,9 +1,8 @@
-import I18n from "i18n-js";
-import * as RNLocalize from "react-native-localize";
-import en from "./en/index";
-import ru from "./ru/index";
-import ua from "./ua/index";
-
+import I18n from 'i18n-js';
+import * as RNLocalize from 'react-native-localize';
+import en from './en/index';
+import ru from './ru/index';
+import ua from './ua/index';
 
 const locales = RNLocalize.getLocales();
 
@@ -15,7 +14,7 @@ I18n.fallbacks = true;
 I18n.translations = {
   en,
   ru,
-  ua
+  ua,
 };
 
 export default I18n;

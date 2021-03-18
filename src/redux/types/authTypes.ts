@@ -24,14 +24,14 @@ export interface IAuth {
 }
 
 export enum IAuthTypes {
-  SWITCH_SECURE = "SWITCH_SECURE",
-  SET_PASSWORD = "SET_PASSWORD",
-  SET_EMAIL = "SET_EMAIL",
-  SET_ERROR = "SET_ERROR",
-  SET_TOKEN = "SET_TOKEN",
-  SET_USER = "SET_USER",
-  SET_INIT = "SET_INIT",
-  LOG_OUT = "LOG_OUT",
+  SWITCH_SECURE = 'SWITCH_SECURE',
+  SET_PASSWORD = 'SET_PASSWORD',
+  SET_EMAIL = 'SET_EMAIL',
+  SET_ERROR = 'SET_ERROR',
+  SET_TOKEN = 'SET_TOKEN',
+  SET_USER = 'SET_USER',
+  SET_INIT = 'SET_INIT',
+  LOG_OUT = 'LOG_OUT',
 }
 
 interface ISwitchSecure {

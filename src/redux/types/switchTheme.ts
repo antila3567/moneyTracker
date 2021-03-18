@@ -1,13 +1,13 @@
 export interface IInitState {
-    theme: boolean
+  theme: boolean;
 }
 export enum switchActionTypes {
-    SWITCH_THEME = 'SWITCH_THEME'
+  SWITCH_THEME = 'SWITCH_THEME',
 }
 
 interface SwitchThemes {
-    type: switchActionTypes.SWITCH_THEME,
-    payload: boolean
+  type: switchActionTypes.SWITCH_THEME;
+  payload: boolean;
 }
 
-export type IThemeActions = SwitchThemes
+export type IThemeActions = SwitchThemes;

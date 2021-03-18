@@ -1,6 +1,6 @@
-import History from './History'
-import Category from './Category'
-import Wallet from './Wallet'
-import Settings from './Settings'
+import History from './History';
+import HomeScreen from './Home';
+import Wallet from './Wallet';
+import Settings from './Settings';
 
-export {History, Category, Wallet, Settings}
+export { History, HomeScreen, Wallet, Settings };

@@ -4,9 +4,9 @@ import switchThemeReducer from './switchThemeReducer';
 import userReducer from './userReduce';
 
 export const rootReducer = combineReducers({
-    auth: authReducer,
-    switchTheme: switchThemeReducer,
-    users: userReducer
-})
+  auth: authReducer,
+  switchTheme: switchThemeReducer,
+  users: userReducer,
+});
 
-export type RootState = ReturnType<typeof rootReducer>
+export type RootState = ReturnType<typeof rootReducer>;

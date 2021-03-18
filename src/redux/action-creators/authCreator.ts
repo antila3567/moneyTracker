@@ -1,51 +1,51 @@
 import { IAuthTypes, IAuthUser } from './../types/authTypes';
 
-export const switchSecure = (bool:boolean) => {
+export const switchSecure = (bool: boolean) => {
   return {
     type: IAuthTypes.SWITCH_SECURE,
-    payload: bool
+    payload: bool,
   };
 };
 
-export const setUserEmail = (email:string) => {
+export const setUserEmail = (email: string) => {
   return {
     type: IAuthTypes.SET_EMAIL,
-    payload: email
+    payload: email,
   };
 };
 
-export const setUserPassword = (password:string) => {
+export const setUserPassword = (password: string) => {
   return {
     type: IAuthTypes.SET_PASSWORD,
-    payload: password
+    payload: password,
   };
 };
 
-export const setUserInfo = (user:IAuthUser) => {
+export const setUserInfo = (user: IAuthUser | null) => {
   return {
     type: IAuthTypes.SET_USER,
-    payload: user
+    payload: user,
   };
 };
 
-export const setUserToken = (token:string) => {
+export const setUserToken = (token: string) => {
   return {
     type: IAuthTypes.SET_TOKEN,
-    payload: token
+    payload: token,
   };
 };
 
-export const setUserError = (error:string | null) => {
+export const setUserError = (error: string | null) => {
   return {
     type: IAuthTypes.SET_ERROR,
-    payload: error
+    payload: error,
   };
 };
 
-export const setInit = (bool:boolean) => {
+export const setInit = (bool: boolean) => {
   return {
     type: IAuthTypes.SET_INIT,
-    payload: bool
+    payload: bool,
   };
 };
 
