@@ -93,4 +93,7 @@ const styles = StyleSheet.create({
     borderWidth: 8,
     borderColor: '#ADD8E6',
   },
+  iconCalendar: {
+    color: '#000'
+  }
 });
