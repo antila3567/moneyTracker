@@ -75,7 +75,7 @@ const Registration = () => {
               secureTextEntry={signUp.secure}
             />
             <TouchableOpacity onPress={() => switchSecure(!signUp.secure)}>
-              <Icon style={styles.icons} active name="eye" />
+              <Icon style={styles.icons} active name={signUp.secure ? 'eye-off' : 'eye'} />
             </TouchableOpacity>
           </Item>
         </View>

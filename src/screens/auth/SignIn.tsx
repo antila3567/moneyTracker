@@ -104,7 +104,7 @@ const SignIn = ({ navigation }: any) => {
               secureTextEntry={login.secure}
             />
             <TouchableOpacity onPress={() => switchSecure(!login.secure)}>
-              <Icon style={styles.icons} active name="eye" />
+              <Icon style={styles.icons} active name={login.secure ? 'eye-off' : 'eye'} />
             </TouchableOpacity>
           </Item>
         </View>

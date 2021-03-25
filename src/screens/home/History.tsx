@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 
-const History = ({}) => {
+const History = ({navigation}:any) => {
+  console.log('nav', navigation)
   return (
-    <TouchableOpacity>
-      <Text>History</Text>
-    </TouchableOpacity>
+    <ScrollView horizontal>
+
+    </ScrollView>
   );
 };
 

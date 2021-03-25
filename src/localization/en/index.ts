@@ -18,9 +18,15 @@ export default {
   emptyFields: "fields can't be empty",
   passValidation: 'password is at least 6 characters',
   wrongPass: 'wrong-password',
+  //HOME
   home: 'HOME',
   wallet: 'WALLET',
   operations: 'OPERATIONS',
   settings: 'SETTINGS',
+  expenses: 'EXPENSES',
+  allExpense: 'all expenses',
+  //ADD MODAL
+  addCategory: 'create new category ',
+  
   
 };

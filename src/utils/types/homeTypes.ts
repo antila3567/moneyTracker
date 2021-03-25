@@ -49,3 +49,48 @@ export interface IBlockItem {
     }
   ];
 }
+//CHARTPIE
+
+export interface IChartPie {
+  categories: any[];
+  styles: any;
+}
+export interface IPiePart {
+  color: string;
+  expenses: any[];
+  icons: number;
+  id: number;
+  name: string;
+}
+
+export interface IPieTrans {
+  item: {
+    color: string;
+    expenseCount: number;
+    id: number;
+    label: string;
+    name: string;
+    percentFlat: string;
+    y: number;
+  };
+}
+
+export interface IBlock {
+  item: {
+    color: string;
+    expenseCount: number;
+    id: number;
+    label: string;
+    name: string;
+    percentFlat: string;
+    y: number;
+  };
+  styles: any;
+  selected: {
+    color: string;
+    expenses: any[];
+    icons: number;
+    id: number;
+    name: string;
+  } | null;
+}

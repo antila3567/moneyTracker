@@ -22,7 +22,7 @@ export default () => {
   const Auth = createStackNavigator();
   const Tab = createBottomTabNavigator();
   const authState = useTypedSelector((state) => state.auth);
-  const switchColor = useTypedSelector((state) => state.switchTheme.theme);
+  const theme = useTypedSelector((state) => state.switchTheme.theme);
   const { setInit, setUserInfo } = useActions();
 
   const onAuthStateChanged = (user: IAuthUser | any) => {
@@ -39,14 +39,27 @@ export default () => {
     return subscriber;
   }, []);
 
+  const activeStyles = {
+    color: theme ? '#00BFFF' : '#d3d3d3',
+    fontSize: 30,
+  };
+  const inActive = {
+    color: theme ? '#006586' : 'gray',
+    fontSize: 25,
+  };
+
   return (
     <NavigationContainer>
       {authState.user || authState.token ? (
         <Tab.Navigator
           initialRouteName="Home"
           tabBarOptions={{
-            activeTintColor: '#006586',
-            style: { backgroundColor: '#F0FFFF', position: 'relative' },
+            activeTintColor: theme ? '#006586' : '#d3d3d3',
+            labelStyle: { fontFamily: 'serif' },
+            style: {
+              backgroundColor: theme ? '#F0FFFF' : '#141414',
+              position: 'relative',
+            },
           }}
         >
           <Tab.Screen
@@ -127,13 +140,4 @@ export default () => {
       )}
     </NavigationContainer>
   );
-};
-
-const activeStyles = {
-  color: '#00BFFF',
-  fontSize: 30,
-};
-const inActive = {
-  color: '#006586',
-  fontSize: 25,
 };

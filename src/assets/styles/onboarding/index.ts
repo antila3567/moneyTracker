@@ -27,12 +27,14 @@ export const lightTheme = StyleSheet.create({
     fontSize: 35,
     textAlign: 'center',
     fontWeight: 'bold',
+    fontFamily:'serif',
   },
   descrContentText: {
     marginTop: 20,
     textAlign: 'left',
     fontSize: 24,
     color: '#707070',
+    fontFamily:'serif',
   },
   btnBlock: {
     alignItems: 'center',
@@ -63,6 +65,7 @@ export const lightTheme = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 40,
     color: '#000',
+    fontFamily:'serif',
   },
 });
 
@@ -76,5 +79,6 @@ export const darkTheme = StyleSheet.create({
     textAlign: 'center',
     fontWeight: 'bold',
     color: '#fff',
+    fontFamily:'serif',
   },
 });

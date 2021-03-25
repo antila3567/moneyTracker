@@ -43,5 +43,88 @@ export default {
   study,
   yhod,
   arrowDown,
-  arrowUp
+  arrowUp,
 };
+
+export const selectIcon = [
+  {
+    name: 'alcohol',
+    uri: require('../../image/icons/alcohol.png'),
+  },
+  {
+    name: 'bus',
+    uri: require('../../image/icons/bus.png'),
+  },
+  {
+    name: 'car',
+    uri: require('../../image/icons/car.png'),
+  },
+  {
+    name: 'clothes',
+    uri: require('../../image/icons/clothes.png'),
+  },
+  {
+    name: 'coffe',
+    uri: require('../../image/icons/coffe.png'),
+  },
+  {
+    name: 'eat',
+    uri: require('../../image/icons/eat.png'),
+  },
+  {
+    name: 'gift',
+    uri: require('../../image/icons/gift.png'),
+  },
+  {
+    name: 'health',
+    uri: require('../../image/icons/health.png'),
+  },
+  {
+    name: 'house',
+    uri: require('../../image/icons/house.png'),
+  },
+  {
+    name: 'internet',
+    uri: require('../../image/icons/internet.png'),
+  },
+  {
+    name: 'kredit',
+    uri: require('../../image/icons/kredit.png'),
+  },
+  {
+    name: 'mobile',
+    uri: require('../../image/icons/mobile.png'),
+  },
+  {
+    name: 'money',
+    uri: require('../../image/icons/money.png'),
+  },
+  {
+    name: 'other',
+    uri: require('../../image/icons/other.png'),
+  },
+  {
+    name: 'pigBank',
+    uri: require('../../image/icons/pigBank.png'),
+  },
+  {
+    name: 'relax',
+    uri: require('../../image/icons/relax.png'),
+  },
+  {
+    name: 'smoke',
+    uri: require('../../image/icons/smoke.png'),
+  },
+  {
+    name: 'sport',
+    uri: require('../../image/icons/sport.png'),
+  },
+  {
+    name: 'study',
+    uri: require('../../image/icons/study.png'),
+  },
+  {
+    name: 'yhod',
+    uri: require('../../image/icons/yhod.png'),
+  },
+];

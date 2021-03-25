@@ -29,37 +29,17 @@ export const lightTheme = StyleSheet.create({
     fontSize: 25,
     fontWeight: 'bold',
     paddingLeft: 10,
+    color: '#000',
+    fontFamily: 'serif',
   },
   chooseDay: {
-    fontSize: 20,
-    marginLeft: 10,
+    fontSize: 17,
+    marginLeft: 5,
     color: '#000',
+    fontFamily: 'serif',
   },
   iconCalendar: {
     color: '#000',
-  },
-  catagories: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 10,
-    marginTop: 10,
-  },
-  catagoriesBtn: {
-    flexDirection: 'row',
-  },
-  catagoriesTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  defaultBtn: {
-    fontSize: 50,
-  },
-  activeBtn: {
-    borderBottomWidth: 2,
-    borderColor: '#00BFFF',
-    color: '#00BFFF',
-    fontSize: 50,
   },
   blockIcons: {
     width: 30,
@@ -83,61 +63,78 @@ export const lightTheme = StyleSheet.create({
   },
   blockName: {
     marginLeft: 5,
+    width: '80%',
+    fontFamily: 'serif',
   },
   scrollWrap: {
-    paddingBottom: 60,
+    height: 130,
   },
   showBlock: {
     flexDirection: 'row',
   },
-  addBlockBtn: {
-    paddingVertical: 15,
+  arrowBlock: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  arrowCircle: {
+    backgroundColor: '#00BFFF',
+    borderRadius: 30,
+    width: 30,
+    height: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+  },
+  arrowBtn: {
+    width: 20,
+    height: 15,
+  },
+  pieCircle: {
+    position: 'absolute',
+    top: '32%',
+    width: '100%',
+    paddingLeft: 5,
+  },
+  pieText: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontFamily: 'serif',
+  },
+  flatList: {
+    paddingHorizontal: 10,
+  },
+  flatCircle: {
+    borderWidth: 1,
+    marginTop: 10,
+    width: 105,
+    height: 105,
+    borderRadius: 100,
+    flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
   },
-  addBtn: {
-    borderWidth: 2,
-    borderRadius: 10,
-    width: 150,
-    padding: 15,
-    borderColor:'#00BFFF',
-    backgroundColor:'#fff',
+  wave: {
+    width: 100,
+    aspectRatio: 1,
+    borderRadius: 50,
+    overflow: 'hidden',
+    borderWidth: 1,
+    borderColor: '#F0FFFF',
   },
-  addBtnText: {
+  circleInfoBlock: {
+    position: 'absolute',
+  },
+  flatTitle: {
     textAlign: 'center',
-    fontWeight:'bold'
+    width: 100,
+    fontFamily: 'serif',
   },
-  descriptionBlock: {
-    marginTop: 20,
-    width: 320,
-    height: 250,
-    marginLeft: 10,
-    marginRight: 10,
-    borderRadius: 10,
-    backgroundColor: '#F0FFFF',
-  },
-  descriptionTitle: {
-    fontSize:18,
-    fontWeight:'bold',
-    borderBottomWidth:1,
-    borderColor:'#00BFFF',
+  currency: {
     textAlign: 'center',
-    padding: 15,
-    backgroundColor:'#fff',
-    borderTopLeftRadius:10,
-    borderTopRightRadius:10,
-    elevation:10
+    fontFamily: 'serif',
+    fontSize: 12,
   },
-  descriptionText: {
-    fontSize:15,
-    color:'#000',
-    padding:5,
-    height: '60%'
-  },
-  moneyBlock: {
-    flexDirection:'row',
-    justifyContent:'space-between',
-    padding:5,
-  }
 });
 
 export const darkTheme = StyleSheet.create({
@@ -145,15 +142,39 @@ export const darkTheme = StyleSheet.create({
     flex: 1,
     backgroundColor: '#000',
   },
-  blockItem: {
+  header: {
     flexDirection: 'row',
-    backgroundColor: '#F0FFFF',
-    width: 'auto',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 10,
-    borderRadius: 10,
-    marginTop: 10,
-    marginLeft: 10,
+    backgroundColor: '#141414',
+    height: 70,
+    elevation: 10,
+  },
+  headerTitle: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    paddingLeft: 10,
+    color: '#d3d3d3',
+    fontFamily: 'serif',
+  },
+  calendar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    height: 50,
+    borderTopLeftRadius: 10,
+    borderBottomLeftRadius: 10,
+    borderWidth: 2,
+    borderRightWidth: 0,
+    borderColor: '#d3d3d3',
+  },
+  chooseDay: {
+    fontSize: 18,
+    marginLeft: 5,
+    color: '#d3d3d3',
+    fontFamily: 'serif',
+  },
+  iconCalendar: {
+    color: '#d3d3d3',
   },
 });

@@ -25,6 +25,7 @@ export const lightTheme = StyleSheet.create({
     textAlign: 'center',
     fontSize: 35,
     color: '#000',
+    fontFamily:'serif'
   },
   loginInputs: {
     marginTop: 10,
@@ -44,6 +45,7 @@ export const lightTheme = StyleSheet.create({
     color: '#000',
     fontWeight: 'bold',
     fontSize: 18,
+    fontFamily:'serif'
   },
   socialImg: {
     marginLeft: 5,
@@ -53,6 +55,7 @@ export const lightTheme = StyleSheet.create({
   forgotPass: {
     fontSize: 14,
     color: 'gray',
+    fontFamily:'serif'
   },
   loginButtons: {
     marginTop: 20,
@@ -75,6 +78,7 @@ export const lightTheme = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 22,
     color: '#000',
+    fontFamily:'serif'
   },
   signUpBtn: {
     marginTop: 25,
@@ -85,6 +89,7 @@ export const lightTheme = StyleSheet.create({
     fontSize: 18,
     color: 'gray',
     fontWeight: 'bold',
+    fontFamily:'serif'
   },
   signUpButton: {
     width: '60%',
@@ -125,6 +130,7 @@ export const darkTheme = StyleSheet.create({
     textAlign: 'center',
     fontSize: 35,
     color: '#d3d3d3',
+    fontFamily:'serif'
   },
   loginBtn: {
     width: '45%',
@@ -153,10 +159,12 @@ export const darkTheme = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 22,
     color: '#d3d3d3',
+    fontFamily:'serif'
   },
   socialText: {
     color: '#d3d3d3',
     fontWeight: 'bold',
     fontSize: 18,
+    fontFamily:'serif',
   },
 });

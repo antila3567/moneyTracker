@@ -5,23 +5,19 @@ import { IBlockItem, IItem } from '../../utils/types/homeTypes';
 interface IBlock {
   item: IBlockItem;
   styles: any;
-  setSelectedCategory: (item: IItem) => void;
+  historyCategory: (item: IItem) => void;
 }
 
-const CategoriesBlock = ({ item, styles, setSelectedCategory }: IBlock) => {
+const CategoriesBlock = ({ item, styles, historyCategory }: IBlock) => {
   return (
     <TouchableOpacity
       style={styles.blockItem}
-      onPress={() => setSelectedCategory(item)}
+      onPress={() => historyCategory(item)}
     >
-      <Text style={styles.blockName}>{item.name}</Text>
+      <Text numberOfLines={1} style={styles.blockName}>{item.name}</Text>
       <Image
         source={item.icons}
-        style={{
-          width: 30,
-          height: 30,
-          tintColor: item.color,
-        }}
+        style={{ width: 30, height: 30, tintColor: item.color }}
       />
     </TouchableOpacity>
   );
