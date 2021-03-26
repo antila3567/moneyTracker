@@ -100,6 +100,7 @@ export const lightTheme = StyleSheet.create({
     textAlign: 'center',
     fontWeight: 'bold',
     fontFamily: 'serif',
+    fontSize:12
   },
   flatList: {
     paddingHorizontal: 10,

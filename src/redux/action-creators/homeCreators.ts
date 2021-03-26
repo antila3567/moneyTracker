@@ -28,3 +28,39 @@ export const openAddModal = (bool: boolean) => {
     payload: bool,
   };
 };
+
+export const newCategoryName = (name: string) => {
+  return {
+    type: HomeActionTypes.NEW_CATEGORY_NAME,
+    payload: name
+  };
+};
+
+export const newCategoryIcons = (icons: string | number) => {
+  return {
+    type: HomeActionTypes.NEW_CATEGORY_ICONS,
+    payload: icons
+  };
+};
+
+export const newCategoryColors = (colors: string) => {
+  return {
+    type: HomeActionTypes.NEW_CATEGORY_COLORS,
+    payload: colors
+  };
+};
+
+export const createNewCategory = (data: object) => {
+  return {
+    type: HomeActionTypes.CREATE_NEW_CATEGORY,
+    payload: data
+  };
+};
+
+export const removeCategory = (id: number) => {
+  return {
+    type: HomeActionTypes.REMOVE_CATEGORY,
+    payload: id
+  };
+};
+

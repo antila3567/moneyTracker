@@ -11,7 +11,7 @@ import { useActions } from './hooks/useActions';
 import { IAuthUser } from './redux/types/authTypes';
 import OnboardingScreen from './screens/onboarding/OnboardingScreen';
 import auth from '@react-native-firebase/auth';
-import AddPayBlock from './components/modals/addPayModal';
+import AddPayBlock from './components/modals/AddPayModal';
 import I18n from './localization/locale';
 
 export default () => {

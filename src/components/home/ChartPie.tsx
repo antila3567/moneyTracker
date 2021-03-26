@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Text, View, FlatList } from 'react-native';
-import Svg, { Circle } from 'react-native-svg';
+import Svg from 'react-native-svg';
 import { VictoryPie } from 'victory-native';
 import { useActions } from '../../hooks/useActions';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
@@ -11,12 +11,15 @@ import ExpenseFlatlist from './ExpenseFlatlist';
 
 const ChartPie = ({ categories, styles }: IChartPie) => {
   const [refFlat, setRefFlat] = useState<any>();
-  const selected = useTypedSelector(state => state.home.selected)
-  const {pushCurrentItem} = useActions()
+  const selected = useTypedSelector((state) => state.home.selected);
+  const { pushCurrentItem } = useActions();
   const formatChart = chartFormatter();
   const chart = formatChart;
   const colors = chart.map((item) => item.color);
-  const totalExpenseCount = chart.reduce((a, b) => a + (b.expenseCount || 0),0);
+  const totalExpenseCount = chart.reduce(
+    (a, b) => a + (b.expenseCount || 0),
+    0
+  );
   const totalExpense = chart.reduce((a, b) => a + (b.y || 0), 0);
 
   const setSelectCategoryByName = (name: string, id: number) => {
@@ -44,7 +47,6 @@ const ChartPie = ({ categories, styles }: IChartPie) => {
   return (
     <View>
       <Svg width={400} height={350}>
-        <Circle cx={200} cy={175} r={50} fill="#F0FFFF" />
         <VictoryPie
           standalone={false}
           height={350}
@@ -59,7 +61,7 @@ const ChartPie = ({ categories, styles }: IChartPie) => {
           labelRadius={80}
           style={{
             data: { fillOpacity: 0.9, stroke: '#000000', strokeWidth: 1.5 },
-            labels: { fontSize: 13, fill: '#ffffff', fontFamily:'serif', },
+            labels: { fontSize: 13, fill: '#ffffff', fontFamily: 'serif' },
           }}
           events={[
             {
@@ -71,8 +73,8 @@ const ChartPie = ({ categories, styles }: IChartPie) => {
                       target: 'labels',
                       mutation: (props) => {
                         let categoryName = chart[props.index].name;
-                        let index = chart[props.index].id;
-                        setSelectCategoryByName(categoryName, index);
+                        let id = props.index
+                        setSelectCategoryByName(categoryName, id);
                       },
                     },
                   ];
@@ -82,11 +84,13 @@ const ChartPie = ({ categories, styles }: IChartPie) => {
           ]}
         />
       </Svg>
-      <View style={styles.pieCircle}>
-        <Text style={styles.pieText}>{totalExpense}</Text>
-        <Text style={styles.pieText}>{I18n.t('allExpense')}</Text>
-        <Text style={styles.pieText}>{totalExpenseCount}</Text>
-      </View>
+      {totalExpenseCount !== 0 ? (
+        <View style={styles.pieCircle}>
+          <Text style={styles.pieText}>{totalExpense.toFixed(2)}</Text>
+          <Text style={styles.pieText}>{I18n.t('allExpense')}</Text>
+          <Text style={styles.pieText}>{totalExpenseCount}</Text>
+        </View>
+      ) : null}
       <View>
         <FlatList
           data={formatChart}

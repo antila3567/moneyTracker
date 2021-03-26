@@ -24,6 +24,17 @@ export default {
   settings: 'НАЛАШТУВАННЯ',
   expenses: 'ВИТРАТИ',
   allExpense: 'усі витрати',
-   //ADD MODAL
-   addCategory: 'додати нову категорію',
+  //ADD MODAL
+  addCategory: 'додати нову категорію',
+  icons: 'іконки',
+  color: 'колір',
+  inputName: 'назва категорії',
+  close: 'закрити',
+  create: 'створити',
+  emptyField: 'введіть назву категорії',
+  //REMOVEMODAL
+  removeCategory: 'видалити категорію?',
+  categoryInfo: 'всю інформацію буде видалено',
+  cancelBtn: 'відмінити',
+  okBtn: 'видалити',
 };

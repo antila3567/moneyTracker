@@ -27,6 +27,15 @@ export default {
   allExpense: 'all expenses',
   //ADD MODAL
   addCategory: 'create new category ',
-  
-  
+  icons: 'icons',
+  color: 'color',
+  inputName: 'category name',
+  close: 'close',
+  create: 'create',
+  emptyField: 'enter name category',
+  //REMOVEMODAL
+  removeCategory: 'delete category?',
+  categoryInfo: 'all information will be deleted!',
+  cancelBtn: 'cancel',
+  okBtn: 'delete',
 };

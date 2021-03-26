@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { View, Text, FlatList, Alert } from 'react-native';
 import { lightTheme, darkTheme } from '../../assets/styles/mainStack/home';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { catetegoriesData } from './data';
@@ -11,20 +11,30 @@ import { useActions } from '../../hooks/useActions';
 import I18n from '../../localization/locale';
 
 const HomeScreen = ({ navigation }: any) => {
-  const switchColor: boolean = useTypedSelector( (state) => state.switchTheme.theme );
+  const switchColor: boolean = useTypedSelector(
+    (state) => state.switchTheme.theme
+  );
   const styles = switchColor ? lightTheme : { ...lightTheme, ...darkTheme };
   const categories = useTypedSelector((state) => state.home.categories);
-  const { pushHomeCategories } = useActions();
+  const { pushHomeCategories, removeCategory } = useActions();
 
   useEffect(() => {
     pushHomeCategories(catetegoriesData);
   }, [catetegoriesData]);
 
   const historyCategory = (category: IItem) => {
-    console.log(category);
     navigation.navigate('History', {
       historyCategory: category,
     });
+  };
+
+  const removeCurrentCategory = (id: number) => {
+    Alert.alert(I18n.t('removeCategory'), I18n.t('categoryInfo'), [
+      {
+        text: I18n.t('cancelBtn'),
+      },
+      { text: I18n.t('okBtn'), onPress: () => removeCategory(id) },
+    ]);
   };
 
   const renderBlock = ({ item }: ICategories) => {

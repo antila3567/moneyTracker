@@ -48,83 +48,83 @@ export default {
 
 export const selectIcon = [
   {
-    name: 'alcohol',
+    name: alcohol,
     uri: require('../../image/icons/alcohol.png'),
   },
   {
-    name: 'bus',
+    name: bus,
     uri: require('../../image/icons/bus.png'),
   },
   {
-    name: 'car',
+    name: car,
     uri: require('../../image/icons/car.png'),
   },
   {
-    name: 'clothes',
+    name: clothes,
     uri: require('../../image/icons/clothes.png'),
   },
   {
-    name: 'coffe',
+    name: coffe,
     uri: require('../../image/icons/coffe.png'),
   },
   {
-    name: 'eat',
+    name: eat,
     uri: require('../../image/icons/eat.png'),
   },
   {
-    name: 'gift',
+    name: gift,
     uri: require('../../image/icons/gift.png'),
   },
   {
-    name: 'health',
+    name: health,
     uri: require('../../image/icons/health.png'),
   },
   {
-    name: 'house',
+    name: house,
     uri: require('../../image/icons/house.png'),
   },
   {
-    name: 'internet',
+    name: internet,
     uri: require('../../image/icons/internet.png'),
   },
   {
-    name: 'kredit',
+    name: kredit,
     uri: require('../../image/icons/kredit.png'),
   },
   {
-    name: 'mobile',
+    name: mobile,
     uri: require('../../image/icons/mobile.png'),
   },
   {
-    name: 'money',
+    name: money,
     uri: require('../../image/icons/money.png'),
   },
   {
-    name: 'other',
+    name: other,
     uri: require('../../image/icons/other.png'),
   },
   {
-    name: 'pigBank',
+    name: pigBank,
     uri: require('../../image/icons/pigBank.png'),
   },
   {
-    name: 'relax',
+    name: relax,
     uri: require('../../image/icons/relax.png'),
   },
   {
-    name: 'smoke',
+    name: smoke,
     uri: require('../../image/icons/smoke.png'),
   },
   {
-    name: 'sport',
+    name: sport,
     uri: require('../../image/icons/sport.png'),
   },
   {
-    name: 'study',
+    name: study,
     uri: require('../../image/icons/study.png'),
   },
   {
-    name: 'yhod',
+    name: yhod,
     uri: require('../../image/icons/yhod.png'),
   },
 ];
