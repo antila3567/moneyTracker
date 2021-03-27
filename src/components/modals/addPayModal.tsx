@@ -47,7 +47,7 @@ const AddPayBlock = () => {
 
   useEffect(() => {
     Animated.timing(fadeAnim, {
-      useNativeDriver: true,
+      useNativeDriver: false,
       toValue: 1,
       duration: 1200,
     }).start();
@@ -114,12 +114,12 @@ const AddPayBlock = () => {
             <View style={styles.buttonsBlock}>
               <TouchableOpacity
                 onPress={() => openAddModal(false)}
-                style={styles.buttons}
+                style={styles.btnCLose}
               >
-                <Text style={styles.createBtnText}>{I18n.t('close')}</Text>
+                <Text style={styles.createBtnTextClose}>{I18n.t('close')} ?</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                style={styles.buttons}
+                style={styles.btnAdd}
                 onPress={() => addNewCategory()}
               >
                 <Text style={styles.createBtnText}>{I18n.t('create')}</Text>

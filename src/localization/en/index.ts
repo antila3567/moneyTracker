@@ -38,4 +38,10 @@ export default {
   categoryInfo: 'all information will be deleted!',
   cancelBtn: 'cancel',
   okBtn: 'delete',
+  //ADDMONEYMODAL
+  addMoney: 'add money',
+  removeMoney: 'remove money',
+  confirm: 'confirm',
+  amount: 'enter the amount',
+  description: 'description (optional)',
 };

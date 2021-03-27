@@ -8,6 +8,9 @@ export interface IHomeState {
   name: string;
   icons: string | number;
   colors: string;
+  isPurchaseModal: boolean;
+  categoryId: number | null;
+  categoryName: string;
 }
 
 export enum HomeActionTypes {
@@ -20,6 +23,23 @@ export enum HomeActionTypes {
   NEW_CATEGORY_ICONS = 'NEW_CATEGORY_ICONS',
   CREATE_NEW_CATEGORY = 'CREATE_NEW_CATEGORY',
   REMOVE_CATEGORY = 'REMOVE_CATEGORY',
+  ADD_PURCHASE_MODAL = 'ADD_PURCHASE_MODAL',
+  GET_CATEGORY_ID = 'GET_CATEGORY_ID',
+  GET_CATEGORY_NAME = 'GET_CATEGORY_NAME',
+}
+
+interface getCategoryName {
+  type: HomeActionTypes.GET_CATEGORY_NAME;
+  payload: string;
+}
+interface AddPurchase {
+  type: HomeActionTypes.ADD_PURCHASE_MODAL;
+  payload: boolean;
+}
+
+interface getCategoryId {
+  type: HomeActionTypes.GET_CATEGORY_ID;
+  payload: number;
 }
 
 interface CreateNewCategory {
@@ -81,4 +101,7 @@ export type IHomeActions =
   | NewCategoryIcons
   | NewCategoryName
   | RemoveCategory
+  | AddPurchase
+  | getCategoryId
+  | getCategoryName
   | CreateNewCategory;

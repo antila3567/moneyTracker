@@ -73,13 +73,25 @@ export const lightTheme = StyleSheet.create({
     width: '100%',
     marginBottom: 30,
   },
-  buttons: {
+  btnAdd: {
     marginTop: 10,
     borderRadius: 10,
     width: 130,
     padding: 10,
     elevation: 4,
-    backgroundColor: '#e6fcfc',
+    backgroundColor: '#00BFFF',
+  },
+  btnCLose: {
+    marginTop: 10,
+    borderRadius: 10,
+    width: 130,
+    padding: 10,
+  },
+  createBtnTextClose: {
+    fontSize: 17,
+    textAlign: 'center',
+    color: 'gray',
+    fontFamily: 'serif',
   },
   createBtnText: {
     fontSize: 17,

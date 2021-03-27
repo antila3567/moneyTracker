@@ -37,4 +37,10 @@ export default {
   categoryInfo: 'всю інформацію буде видалено',
   cancelBtn: 'відмінити',
   okBtn: 'видалити',
+  //ADDMONEYMODAL
+  addMoney: 'додати',
+  removeMoney: 'зняти',
+  confirm: 'підтвердити',
+  amount: 'введіть суму',
+  description: 'опис (не обов\'язково)',
 };

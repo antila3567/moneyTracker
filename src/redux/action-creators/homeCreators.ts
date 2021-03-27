@@ -32,35 +32,55 @@ export const openAddModal = (bool: boolean) => {
 export const newCategoryName = (name: string) => {
   return {
     type: HomeActionTypes.NEW_CATEGORY_NAME,
-    payload: name
+    payload: name,
   };
 };
 
 export const newCategoryIcons = (icons: string | number) => {
   return {
     type: HomeActionTypes.NEW_CATEGORY_ICONS,
-    payload: icons
+    payload: icons,
   };
 };
 
 export const newCategoryColors = (colors: string) => {
   return {
     type: HomeActionTypes.NEW_CATEGORY_COLORS,
-    payload: colors
+    payload: colors,
   };
 };
 
 export const createNewCategory = (data: object) => {
   return {
     type: HomeActionTypes.CREATE_NEW_CATEGORY,
-    payload: data
+    payload: data,
   };
 };
 
 export const removeCategory = (id: number) => {
   return {
     type: HomeActionTypes.REMOVE_CATEGORY,
-    payload: id
+    payload: id,
   };
 };
 
+export const addPurchaseModal = (bool: boolean) => {
+  return {
+    type: HomeActionTypes.ADD_PURCHASE_MODAL,
+    payload: bool,
+  };
+};
+
+export const getCategoryId = (id: number) => {
+  return {
+    type: HomeActionTypes.GET_CATEGORY_ID,
+    payload: id,
+  };
+};
+
+export const getCategoryName = (name: string) => {
+  return {
+    type: HomeActionTypes.GET_CATEGORY_NAME,
+    payload: name,
+  };
+};

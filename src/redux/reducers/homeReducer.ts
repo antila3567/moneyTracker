@@ -8,10 +8,13 @@ const init: IHomeState = {
   categories: [],
   selected: null,
   currency: 'UAH',
-  addModal: false,
   name: '',
   icons: 16,
   colors: '#00BFFF',
+  categoryId: 0,
+  categoryName: '',
+  addModal: false,
+  isPurchaseModal: true,
 };
 
 const homeReducer = (state = init, action: IHomeActions): IHomeState => {
@@ -39,8 +42,16 @@ const homeReducer = (state = init, action: IHomeActions): IHomeState => {
         colors: '#00BFFF',
       };
     case HomeActionTypes.REMOVE_CATEGORY:
-      const newData = state.categories.filter(item => item.id !== action.payload)
-      return { ...state, categories: newData};
+      const newData = state.categories.filter(
+        (item) => item.id !== action.payload
+      );
+      return { ...state, categories: newData };
+    case HomeActionTypes.ADD_PURCHASE_MODAL:
+      return { ...state, isPurchaseModal: action.payload };
+    case HomeActionTypes.GET_CATEGORY_ID:
+      return { ...state, categoryId: action.payload };
+    case HomeActionTypes.GET_CATEGORY_NAME:
+      return { ...state, categoryName: action.payload };
     default:
       return state;
   }
