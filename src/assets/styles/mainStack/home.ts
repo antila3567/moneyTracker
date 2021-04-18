@@ -10,8 +10,7 @@ export const lightTheme = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#F0FFFF',
-    height: 70,
-    elevation: 10,
+    height: '12%',
   },
   calendar: {
     flexDirection: 'row',
@@ -24,6 +23,15 @@ export const lightTheme = StyleSheet.create({
     borderWidth: 2,
     borderRightWidth: 0,
     borderColor: '#00BFFF',
+  },
+  shadow2: {
+    shadowColor: '#000000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
   },
   headerTitle: {
     fontSize: 25,
@@ -49,6 +57,7 @@ export const lightTheme = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
     paddingHorizontal: 5,
+    paddingVertical:5
   },
   blockItem: {
     flexDirection: 'row',
@@ -58,8 +67,15 @@ export const lightTheme = StyleSheet.create({
     alignItems: 'center',
     padding: 12,
     borderRadius: 10,
-    marginTop: 10,
-    elevation: 5,
+  },
+  shadow: {
+    shadowColor: '#000000',
+    shadowOffset: {
+      width: 0,
+      height: 0.5,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 0.3,
   },
   blockName: {
     marginLeft: 5,
@@ -100,7 +116,8 @@ export const lightTheme = StyleSheet.create({
     textAlign: 'center',
     fontWeight: 'bold',
     fontFamily: 'serif',
-    fontSize:12
+    fontSize: 12,
+    color: '#000',
   },
   flatList: {
     paddingHorizontal: 10,
@@ -177,5 +194,12 @@ export const darkTheme = StyleSheet.create({
   },
   iconCalendar: {
     color: '#d3d3d3',
+  },
+  pieText: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontFamily: 'serif',
+    fontSize: 12,
+    color: '#fff',
   },
 });

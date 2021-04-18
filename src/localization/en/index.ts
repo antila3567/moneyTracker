@@ -44,4 +44,23 @@ export default {
   confirm: 'confirm',
   amount: 'enter the amount',
   description: 'description (optional)',
+  //month
+  1: 'Jan',
+  2: 'Feb',
+  3: 'Mar',
+  4: 'Apr',
+  5: 'May',
+  6: 'Jun',
+  7: 'Jul',
+  8: 'Aug',
+  9: 'Sep',
+  10: 'Oct',
+  11: 'Dec',
+  12: 'Nov',
+  //wallet
+  balance: 'Current Balance',
+  increase: 'increase',
+  decrease: 'decrease',
+  goal: 'add goal',
+  period: 'period',
 };

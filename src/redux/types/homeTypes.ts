@@ -1,7 +1,24 @@
 import { IPiePart } from './../../utils/types/homeTypes';
 
+export type Categories = {
+  id: number;
+  name: string;
+  icons: string;
+  color: string;
+  expenses: [
+    {
+      id: number;
+      title: string;
+      description: string;
+      location: string;
+      total: number;
+      status: string;
+    }
+  ];
+};
+
 export interface IHomeState {
-  categories: any[];
+  categories: Categories[];
   selected: IPiePart | null;
   currency: string;
   addModal: boolean;
@@ -26,6 +43,18 @@ export enum HomeActionTypes {
   ADD_PURCHASE_MODAL = 'ADD_PURCHASE_MODAL',
   GET_CATEGORY_ID = 'GET_CATEGORY_ID',
   GET_CATEGORY_NAME = 'GET_CATEGORY_NAME',
+  INCREMENT_AMOUNT = 'INCREMENT_AMOUNT',
+  DECREMENT_AMOUNT = 'DECREMENT_AMOUNT',
+}
+
+interface DecrementAmount {
+  type: HomeActionTypes.DECREMENT_AMOUNT;
+  payload: any[];
+}
+
+interface IncrementAmount {
+  type: HomeActionTypes.INCREMENT_AMOUNT;
+  payload: Categories;
 }
 
 interface getCategoryName {
@@ -44,13 +73,7 @@ interface getCategoryId {
 
 interface CreateNewCategory {
   type: HomeActionTypes.CREATE_NEW_CATEGORY;
-  payload: {
-    color: string;
-    expenses: [{ id: number; total: number }];
-    icons: number;
-    id: number;
-    name: string;
-  };
+  payload: Categories;
 }
 interface RemoveCategory {
   type: HomeActionTypes.REMOVE_CATEGORY;
@@ -104,4 +127,6 @@ export type IHomeActions =
   | AddPurchase
   | getCategoryId
   | getCategoryName
+  | IncrementAmount
+  | DecrementAmount
   | CreateNewCategory;

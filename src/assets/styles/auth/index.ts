@@ -76,7 +76,7 @@ export const lightTheme = StyleSheet.create({
   loginBtnText: {
     textAlign: 'center',
     fontWeight: 'bold',
-    fontSize: 22,
+    fontSize: 20,
     color: '#000',
     fontFamily:'serif'
   },

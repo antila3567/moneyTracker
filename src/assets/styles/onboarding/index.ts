@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 export const lightTheme = StyleSheet.create({
   wrapper: {
     flex: 1,
-    backgroundColor: '#F0FFFF',
   },
   headerBlock: {
     height: 50,

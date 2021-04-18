@@ -11,10 +11,10 @@ const init: IHomeState = {
   name: '',
   icons: 16,
   colors: '#00BFFF',
-  categoryId: 0,
+  categoryId: null,
   categoryName: '',
   addModal: false,
-  isPurchaseModal: true,
+  isPurchaseModal: false,
 };
 
 const homeReducer = (state = init, action: IHomeActions): IHomeState => {
@@ -52,9 +52,19 @@ const homeReducer = (state = init, action: IHomeActions): IHomeState => {
       return { ...state, categoryId: action.payload };
     case HomeActionTypes.GET_CATEGORY_NAME:
       return { ...state, categoryName: action.payload };
+    case HomeActionTypes.INCREMENT_AMOUNT:
+      const filterCategory = state.categories.filter(
+        (item) => item.id !== state.categoryId
+      );
+      const newAmount = [...filterCategory, action.payload];
+      return {
+        ...state,
+        categories: newAmount
+      };
     default:
-      return state;
+      const isAllActions: never = action;
   }
+  return state;
 };
 
 export default homeReducer;

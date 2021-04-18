@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { ReactElement, useEffect, useRef } from 'react';
 import { Icon, Input, Item, Toast } from 'native-base';
 import { View, Text, TouchableOpacity, Animated, Image } from 'react-native';
 import Modal from 'react-native-modal';
@@ -9,10 +9,9 @@ import { useTypedSelector } from '../../hooks/useTypedSelector';
 import I18n from '../../localization/locale';
 import { lightTheme, darkTheme } from '../../assets/styles/mainStack/addModal';
 
-const AddPayBlock = () => {
+const AddPayBlock = (): ReactElement => {
   const category = useTypedSelector((state) => state.home);
   const lastId = Math.max(...category.categories.map((item) => item.id));
-  console.log(category);
   const {
     openAddModal,
     newCategoryName,
@@ -37,7 +36,7 @@ const AddPayBlock = () => {
         color: category.colors,
         expenses: [{ id: 0, total: 0.1 }],
         icons: category.icons,
-        id: lastId + 1,
+        id: !isFinite(lastId) ? 1 : lastId + 1,
         name: category.name,
       };
       createNewCategory(data);
@@ -116,7 +115,9 @@ const AddPayBlock = () => {
                 onPress={() => openAddModal(false)}
                 style={styles.btnCLose}
               >
-                <Text style={styles.createBtnTextClose}>{I18n.t('close')} ?</Text>
+                <Text style={styles.createBtnTextClose}>
+                  {I18n.t('close')} ?
+                </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.btnAdd}

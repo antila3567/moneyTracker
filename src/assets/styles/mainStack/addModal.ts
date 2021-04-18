@@ -37,8 +37,8 @@ export const lightTheme = StyleSheet.create({
     textAlign: 'center',
     textAlignVertical: 'center',
     borderWidth: 8,
-    backgroundColor: '#00BFFF',
-    borderColor: '#ADD8E6',
+    backgroundColor: '#F0FFFF',
+    borderColor: '#00e0fa',
   },
   iconTitle: {
     fontSize: 15,

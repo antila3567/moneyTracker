@@ -84,3 +84,17 @@ export const getCategoryName = (name: string) => {
     payload: name,
   };
 };
+
+export const addNewExpense = (expense: any[]) => {
+  return {
+    type: HomeActionTypes.INCREMENT_AMOUNT,
+    payload: expense,
+  };
+};
+
+export const removeAmountExpense = (expense: object) => {
+  return {
+    type: HomeActionTypes.DECREMENT_AMOUNT,
+    payload: expense,
+  };
+};

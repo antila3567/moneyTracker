@@ -13,11 +13,11 @@ import OnboardingScreen from './screens/onboarding/OnboardingScreen';
 import auth from '@react-native-firebase/auth';
 import AddPayBlock from './components/modals/AddPayModal';
 import I18n from './localization/locale';
+import { kred } from './services/google/kred';
 
 export default () => {
   GoogleSignin.configure({
-    webClientId:
-      '568283166698-kj00fldo4trvec20hsfv7p9vomtl90bv.apps.googleusercontent.com',
+    webClientId: kred,
   });
   const Auth = createStackNavigator();
   const Tab = createBottomTabNavigator();
@@ -52,7 +52,7 @@ export default () => {
     <NavigationContainer>
       {authState.user || authState.token ? (
         <Tab.Navigator
-          initialRouteName="Home"
+          initialRouteName="Wallet"
           tabBarOptions={{
             activeTintColor: theme ? '#006586' : '#d3d3d3',
             labelStyle: { fontFamily: 'serif' },

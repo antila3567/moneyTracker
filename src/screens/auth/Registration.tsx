@@ -1,5 +1,5 @@
 import { Icon, Input, Item } from 'native-base';
-import React from 'react';
+import React, { ReactElement } from 'react';
 import {
   SafeAreaView,
   Text,
@@ -12,8 +12,10 @@ import { useTypedSelector } from '../../hooks/useTypedSelector';
 import I18n from '../../localization/locale';
 import auth from '@react-native-firebase/auth';
 import { useActions } from '../../hooks/useActions';
+import { grad } from '../../assets/styles/blocks/gradient';
+import LinearGradient from 'react-native-linear-gradient';
 
-const Registration = () => {
+const Registration = ():ReactElement => {
   // const expressionEmail = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
   const switchColor = useTypedSelector((state) => state.switchTheme.theme);
   const styles = switchColor ? lightTheme : { ...lightTheme, ...darkTheme };
@@ -46,52 +48,58 @@ const Registration = () => {
   };
 
   return (
-    <SafeAreaView style={styles.wrapper}>
-      <View>
-        <Image
-          style={styles.logo}
-          source={require('../../assets/image/logotypes/logoTransparent.png')}
-        />
-      </View>
-      <View style={styles.loginSection}>
-        <Text style={styles.loginText}>{I18n.t('registration')}</Text>
+    <LinearGradient colors={grad.lightBackground} style={styles.wrapper}>
+      <SafeAreaView>
         <View>
-          <Item style={styles.loginInputs}>
-            <Icon style={styles.icons} active name="ios-person" />
-            <Input
-              onChangeText={(text) => setUserEmail(text)}
-              value={signUp.email}
-              style={styles.inputs}
-              placeholder={I18n.t('email')}
-            />
-          </Item>
-          <Item style={styles.loginInputs}>
-            <Icon style={styles.icons} active name="ios-key" />
-            <Input
-              onChangeText={(text) => setUserPassword(text)}
-              value={signUp.password}
-              style={styles.inputs}
-              placeholder={I18n.t('password')}
-              secureTextEntry={signUp.secure}
-            />
-            <TouchableOpacity onPress={() => switchSecure(!signUp.secure)}>
-              <Icon style={styles.icons} active name={signUp.secure ? 'eye-off' : 'eye'} />
+          <Image
+            style={styles.logo}
+            source={require('../../assets/image/logotypes/logoTransparent.png')}
+          />
+        </View>
+        <View>
+          <Text style={styles.loginText}>{I18n.t('registration')}</Text>
+          <View>
+            <Item style={styles.loginInputs}>
+              <Icon style={styles.icons} active name="ios-person" />
+              <Input
+                onChangeText={(text) => setUserEmail(text)}
+                value={signUp.email}
+                style={styles.inputs}
+                placeholder={I18n.t('email')}
+              />
+            </Item>
+            <Item style={styles.loginInputs}>
+              <Icon style={styles.icons} active name="ios-key" />
+              <Input
+                onChangeText={(text) => setUserPassword(text)}
+                value={signUp.password}
+                style={styles.inputs}
+                placeholder={I18n.t('password')}
+                secureTextEntry={signUp.secure}
+              />
+              <TouchableOpacity onPress={() => switchSecure(!signUp.secure)}>
+                <Icon
+                  style={styles.icons}
+                  active
+                  name={signUp.secure ? 'eye-off' : 'eye'}
+                />
+              </TouchableOpacity>
+            </Item>
+          </View>
+          {signUp.error ? (
+            <Text style={styles.errorMsg}>{signUp.error}</Text>
+          ) : null}
+          <View style={styles.loginButtons}>
+            <TouchableOpacity
+              style={styles.signUpButton}
+              onPress={() => signUpNewUser()}
+            >
+              <Text style={styles.loginBtnText}>{I18n.t('signUp')}</Text>
             </TouchableOpacity>
-          </Item>
+          </View>
         </View>
-        {signUp.error ? (
-          <Text style={styles.errorMsg}>{signUp.error}</Text>
-        ) : null}
-        <View style={styles.loginButtons}>
-          <TouchableOpacity
-            style={styles.signUpButton}
-            onPress={() => signUpNewUser()}
-          >
-            <Text style={styles.loginBtnText}>{I18n.t('signUp')}</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </LinearGradient>
   );
 };
 

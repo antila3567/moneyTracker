@@ -1,9 +1,8 @@
-import { IItem } from './../types/homeTypes';
 import { useTypedSelector } from './../../hooks/useTypedSelector';
 
 export const chartFormatter = () => {
   const categories = useTypedSelector((state) => state.home.categories);
-  let chartData = categories.map((item: IItem) => {
+  let chartData = categories.map((item) => {
     const total = item.expenses.reduce((a, b) => a + (b.total || 0), 0);
     return {
       name: item.name,

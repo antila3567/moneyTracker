@@ -1,6 +1,6 @@
 import React, { ReactElement, useEffect, useRef, useState } from 'react';
-import { Input, Item } from 'native-base';
-import { View, TouchableOpacity, Animated, Text } from 'react-native';
+import { Input, Item, Toast } from 'native-base';
+import { View, Text, TouchableOpacity, Animated } from 'react-native';
 import Modal from 'react-native-modal';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import I18n from '../../localization/locale';
@@ -10,46 +10,64 @@ import {
 } from '../../assets/styles/mainStack/purchaseModal';
 import { useActions } from '../../hooks/useActions';
 
-const PurchaseModal = (): ReactElement => {
-  const purchase = useTypedSelector((state) => state.home);
-  const { addPurchaseModal, addNewExpense } = useActions();
-  const theme = useTypedSelector((state) => state.switchTheme.theme);
-  const fadeAnim = useRef(new Animated.Value(0)).current;
-  const styles = theme ? lightTheme : { ...lightTheme, ...darkTheme };
-  const [am, setAm] = useState('');
-  const [newData, setNewData] = useState<any>([]);
-  const [pur, setPur] = useState([{}]);
-  const data = useTypedSelector((state) => state.home.categories);
-  const filterData = data.filter((item) => item.id === purchase.categoryId);
-  const expense = {
-    id: 5,
-    total: Number(am),
-    date: new Date(),
-  };
+interface IPlansModal {
+  modal: boolean;
+  setModal: (bool: boolean) => void;
+  name: string | null;
+  id: number;
+  children?: never;
+  balance: number;
+  goalName: string;
+  percent: number;
+}
 
-  const changeCurrentAmount = () => {
-    const expenses = [...pur, expense];
-    const concatData = { ...newData, expenses };
-    addNewExpense(concatData);
-    addPurchaseModal(false);
-  };
+const PlansModal = ({
+  modal,
+  setModal,
+  name,
+  id,
+  balance,
+  goalName,
+  percent,
+}: IPlansModal): ReactElement => {
+  const theme = useTypedSelector((state) => state.switchTheme.theme);
+  const styles = theme ? lightTheme : { ...lightTheme, ...darkTheme };
+  const { changeBalance, changeGoal, getGoalId } = useActions();
+  const [sum, setSum] = useState('');
+  const fadeAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    if (filterData) {
-      filterData.map((item) => {
-        setNewData(item);
-        setPur(item.expenses);
-      });
+    if (id !== 0) {
+      getGoalId(id);
     }
-  }, [filterData]);
+  }, [id]);
+
+  const addNewGoal = () => {
+    if (name === 'increase') {
+      changeBalance(balance + Number(sum));
+    }
+    if (name === 'decrease') {
+      changeBalance(balance - Number(sum));
+    }
+    if (name === 'balance' && !!id) {
+      const updateGoal = {
+        name: goalName,
+        total: Number(sum),
+        percent: percent,
+        id: id,
+      };
+      changeGoal(updateGoal);
+    }
+    setModal(false);
+  };
 
   useEffect(() => {
     Animated.timing(fadeAnim, {
       useNativeDriver: false,
       toValue: 1,
-      duration: 2000,
+      duration: 1200,
     }).start();
-  }, [purchase.isPurchaseModal]);
+  }, [modal]);
 
   return (
     <View>
@@ -61,40 +79,34 @@ const PurchaseModal = (): ReactElement => {
         animationOutTiming={900}
         backdropTransitionInTiming={800}
         backdropTransitionOutTiming={800}
-        isVisible={purchase.isPurchaseModal}
+        isVisible={modal}
         avoidKeyboard={true}
-        onBackdropPress={() => addPurchaseModal(false)}
+        onBackdropPress={() => setModal(false)}
         style={styles.contentView}
       >
         <Animated.View style={{ ...styles.content, opacity: fadeAnim }}>
           <View style={styles.contentBlock}>
             <Text numberOfLines={1} style={styles.categoryName}>
-              {purchase.categoryName}
+              change sum
             </Text>
             <Item>
               <Input
-                value={am}
-                onChangeText={(text) => setAm(text.replace(/[^0-9]/g, ''))}
+                value={sum}
+                onChangeText={(text) => setSum(text.replace(/[^0-9]/g, ''))}
                 keyboardType="numeric"
                 style={styles.inputName}
                 placeholder={I18n.t('amount')}
               />
             </Item>
-            <Item>
-              <Input
-                style={styles.inputName}
-                placeholder={I18n.t('description')}
-              />
-            </Item>
             <View style={styles.confirmBtnBLock}>
               <TouchableOpacity
-                onPress={() => addPurchaseModal(false)}
+                onPress={() => setModal(false)}
                 style={styles.closeBtn}
               >
                 <Text style={styles.closeBtnText}>{I18n.t('close')} ?</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={() => changeCurrentAmount()}
+                onPress={() => addNewGoal()}
                 style={styles.confirmBtn}
               >
                 <Text style={styles.confirmBtnText}>{I18n.t('confirm')}</Text>
@@ -107,4 +119,4 @@ const PurchaseModal = (): ReactElement => {
   );
 };
 
-export default PurchaseModal;
+export default PlansModal;

@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { TouchableOpacity, Text, View } from 'react-native';
 import Wave from 'react-native-waveview';
 import { useActions } from '../../hooks/useActions';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { IBlock } from '../../utils/types/homeTypes';
-import PurchaseModal from '../modals/ PurchaseModal';
 
-const ExpenseFlatlist = ({ item, styles, selected }: IBlock) => {
+const ExpenseFlatlist = ({ item, styles, selected }: IBlock): ReactElement => {
   const currency = useTypedSelector((state) => state.home.currency);
   const { addPurchaseModal, getCategoryId, getCategoryName } = useActions();
   const flatListText =
@@ -14,15 +13,14 @@ const ExpenseFlatlist = ({ item, styles, selected }: IBlock) => {
   const flatListBg =
     selected && selected.name == item.name ? item.color : '#F0FFFF';
 
-  const addNewPurchase = (id:number) => {
-    getCategoryId(id)
-    addPurchaseModal(true)
-    getCategoryName(item.name)
-  }
+  const addNewPurchase = (id: number) => {
+    getCategoryId(id);
+    addPurchaseModal(true);
+    getCategoryName(item.name);
+  };
 
   return (
     <>
-      <PurchaseModal />
       <TouchableOpacity
         onPress={() => addNewPurchase(item.id)}
         style={[

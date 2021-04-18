@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { Text, View, FlatList } from 'react-native';
 import Svg from 'react-native-svg';
 import { VictoryPie } from 'victory-native';
@@ -9,7 +9,7 @@ import { chartFormatter } from '../../utils/formatters/chartFormatter';
 import { IChartPie, IPieTrans } from '../../utils/types/homeTypes';
 import ExpenseFlatlist from './ExpenseFlatlist';
 
-const ChartPie = ({ categories, styles }: IChartPie) => {
+const ChartPie = ({ categories, styles }: IChartPie): ReactElement => {
   const [refFlat, setRefFlat] = useState<any>();
   const selected = useTypedSelector((state) => state.home.selected);
   const { pushCurrentItem } = useActions();
@@ -60,7 +60,7 @@ const ChartPie = ({ categories, styles }: IChartPie) => {
           innerRadius={50}
           labelRadius={80}
           style={{
-            data: { fillOpacity: 0.9, stroke: '#000000', strokeWidth: 1.5 },
+            data: { fillOpacity: 0.9, stroke: '#ffffff', strokeWidth: 1.5 },
             labels: { fontSize: 13, fill: '#ffffff', fontFamily: 'serif' },
           }}
           events={[
@@ -73,7 +73,7 @@ const ChartPie = ({ categories, styles }: IChartPie) => {
                       target: 'labels',
                       mutation: (props) => {
                         let categoryName = chart[props.index].name;
-                        let id = props.index
+                        let id = props.index;
                         setSelectCategoryByName(categoryName, id);
                       },
                     },
@@ -93,6 +93,7 @@ const ChartPie = ({ categories, styles }: IChartPie) => {
       ) : null}
       <View>
         <FlatList
+          showsHorizontalScrollIndicator={false}
           data={formatChart}
           renderItem={renderExpense}
           keyExtractor={(item) => String(item.id)}

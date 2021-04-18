@@ -1,26 +1,26 @@
-import React, { useEffect } from 'react';
-import { View, Text, FlatList, Alert } from 'react-native';
+import React, { ReactElement } from 'react';
+import { View, FlatList, Alert } from 'react-native';
 import { lightTheme, darkTheme } from '../../assets/styles/mainStack/home';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
-import { catetegoriesData } from './data';
 import CategoriesBlock from '../../components/home/CategoriesBlock';
 import { ICategories, IItem } from '../../utils/types/homeTypes';
 import ChartPie from '../../components/home/ChartPie';
-import { Icon } from 'native-base';
 import { useActions } from '../../hooks/useActions';
 import I18n from '../../localization/locale';
+import { useNavigation } from '@react-navigation/native';
+import LinearGradient from 'react-native-linear-gradient';
+import { grad } from '../../assets/styles/blocks/gradient';
+import ScrollCalendar from '../../components/home/ScrollCalendar';
+import PurchaseModal from '../../components/modals/ PurchaseModal';
 
-const HomeScreen = ({ navigation }: any) => {
+const HomeScreen = ({}): ReactElement => {
+  const navigation = useNavigation();
   const switchColor: boolean = useTypedSelector(
     (state) => state.switchTheme.theme
   );
   const styles = switchColor ? lightTheme : { ...lightTheme, ...darkTheme };
   const categories = useTypedSelector((state) => state.home.categories);
-  const { pushHomeCategories, removeCategory } = useActions();
-
-  useEffect(() => {
-    pushHomeCategories(catetegoriesData);
-  }, [catetegoriesData]);
+  const { removeCategory } = useActions();
 
   const historyCategory = (category: IItem) => {
     navigation.navigate('History', {
@@ -51,30 +51,27 @@ const HomeScreen = ({ navigation }: any) => {
 
   return (
     <>
-      {categories !== null ? (
-        <View style={styles.wrapper}>
-          <View style={styles.header}>
-            <Text style={styles.headerTitle}>{I18n.t('expenses')}</Text>
-            <View style={styles.calendar}>
-              <View>
-                <Icon name="ios-calendar" style={styles.iconCalendar} />
-              </View>
-              <Text style={styles.chooseDay}>{new Date().toDateString()}</Text>
-            </View>
-          </View>
+      {categories !== null && (
+        <LinearGradient colors={grad.lightBackground} style={styles.wrapper}>
+          <PurchaseModal />
           <View>
-            <View style={styles.scrollWrap}>
-              <FlatList
-                data={categories}
-                renderItem={renderBlock}
-                keyExtractor={(item) => String(item.id)}
-                numColumns={2}
-              />
+            <View style={[styles.header]}>
+              <ScrollCalendar />
             </View>
+            <View>
+              <View style={styles.scrollWrap}>
+                <FlatList
+                  data={categories}
+                  renderItem={renderBlock}
+                  keyExtractor={(item) => String(item.id)}
+                  numColumns={2}
+                />
+              </View>
+            </View>
+            <ChartPie categories={categories} styles={styles} />
           </View>
-          <ChartPie categories={categories} styles={styles} />
-        </View>
-      ) : null}
+        </LinearGradient>
+      )}
     </>
   );
 };
