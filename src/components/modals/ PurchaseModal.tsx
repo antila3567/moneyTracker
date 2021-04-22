@@ -12,7 +12,12 @@ import { useActions } from '../../hooks/useActions';
 
 const PurchaseModal = (): ReactElement => {
   const purchase = useTypedSelector((state) => state.home);
-  const { addPurchaseModal, addNewExpense } = useActions();
+  const {
+    addPurchaseModal,
+    addNewExpense,
+    changeBalance,
+    addNewPurchase,
+  } = useActions();
   const theme = useTypedSelector((state) => state.switchTheme.theme);
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const styles = theme ? lightTheme : { ...lightTheme, ...darkTheme };
@@ -21,6 +26,7 @@ const PurchaseModal = (): ReactElement => {
   const [pur, setPur] = useState([{}]);
   const data = useTypedSelector((state) => state.home.categories);
   const filterData = data.filter((item) => item.id === purchase.categoryId);
+  const balance = useTypedSelector((state) => state.wallet.balance);
   const expense = {
     id: 5,
     total: Number(am),
@@ -32,6 +38,9 @@ const PurchaseModal = (): ReactElement => {
     const concatData = { ...newData, expenses };
     addNewExpense(concatData);
     addPurchaseModal(false);
+    changeBalance(balance - Number(am));
+    addNewPurchase(Number(am));
+    setAm('')
   };
 
   useEffect(() => {

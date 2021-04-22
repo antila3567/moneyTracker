@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 
 export const lightTheme = StyleSheet.create({
   wrapper: {
@@ -57,7 +57,7 @@ export const lightTheme = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
     paddingHorizontal: 5,
-    paddingVertical:5
+    paddingVertical: 5,
   },
   blockItem: {
     flexDirection: 'row',
@@ -108,8 +108,8 @@ export const lightTheme = StyleSheet.create({
   },
   pieCircle: {
     position: 'absolute',
-    top: '32%',
-    width: '100%',
+    top: Dimensions.get('screen').height / 5.8,
+    width: Dimensions.get('screen').width,
     paddingLeft: 5,
   },
   pieText: {

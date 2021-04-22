@@ -3,19 +3,20 @@ import { StyleSheet, View, Animated, TextInput } from 'react-native';
 import Svg, { G, Circle } from 'react-native-svg';
 
 interface IProgressBar {
-  percentage?: number;
+  percentage: number;
   children?: never;
+  overlimit: boolean;
 }
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 const AnimatedInput = Animated.createAnimatedComponent(TextInput);
 
-const ProgressBar = ({ percentage }: IProgressBar): ReactElement => {
+const ProgressBar = ({ percentage, overlimit }: IProgressBar): ReactElement => {
   const animatedValue = useRef(new Animated.Value(0)).current;
   const radius = 40;
   const strokeWidth = 13;
   const duration = 900;
-  const color = '#006586';
+  const color = overlimit ? '#FF4500' : '#006586';
   const delay = 0;
   const max = 100;
   const halfCircle = radius + strokeWidth;
@@ -37,7 +38,7 @@ const ProgressBar = ({ percentage }: IProgressBar): ReactElement => {
 
     animatedValue.addListener((v) => {
       if (circleRef?.current) {
-        const maxPerc = (100 * v.value) / max;
+        const maxPerc = percentage <= 100 ? (100 * v.value) / max : 100;
         const strokeDashoffset =
           circleCircumference - (circleCircumference * maxPerc) / 100;
         circleRef.current.setNativeProps({

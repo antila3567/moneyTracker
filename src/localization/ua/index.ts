@@ -62,4 +62,10 @@ export default {
   decrease: 'відняти',
   goal: 'додайте ціль',
   period: 'термін',
+  daily: 'план на день',
+  weakly: 'план на неділю',
+  month: 'план на місяць',
+  year: 'план на рік',
+  maxSum: 'максимум 10 цифр',
+  changeSum: 'змінити суму',
 };

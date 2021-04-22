@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useMemo, useState } from 'react';
 import {
   View,
   Text,
@@ -15,23 +15,71 @@ import { Icon } from 'native-base';
 import I18n from '../../localization/locale';
 import PlansModal from '../../components/modals/PlansModal';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { useActions } from '../../hooks/useActions';
+import moment from 'moment-timezone';
 
 const Wallet = ({}): ReactElement => {
+  const { showAlert, getDateWallet, newDayAmount } = useActions();
   const [modal, setModal] = useState(false);
   const [whatIsModal, setWhatIsModal] = useState<string | null>(null);
   const [id, setId] = useState(1);
-  const [goalName, setGoalName] = useState('');
-  const [percent, setPercent] = useState(0);
   const goals = useTypedSelector((state) => state.wallet.goals);
   const balance = useTypedSelector((state) => state.wallet.balance);
-  const currency = useTypedSelector((state) => state.home.currency);
+  const dateWallet = useTypedSelector((state) => state.wallet.date);
+  const currency = useTypedSelector((state) => state.wallet.icon);
 
-  const changeBalance = (modal: string, id = 0, name = '', percent = 0) => {
+  useMemo(() => {
+    const date = new Date();
+    const dateNow = {
+      day: moment(date).date(),
+      weak: moment(date).week(),
+      month: moment(date).month(),
+      year: moment(date).year(),
+    };
+    if (dateWallet?.day !== dateNow.day) {
+      newDayAmount(1);
+      getDateWallet(dateNow);
+    }
+    if (dateWallet?.weak !== dateNow.weak) {
+      newDayAmount(2);
+      getDateWallet(dateNow);
+    }
+    if (dateWallet?.month !== dateNow.month) {
+      newDayAmount(3);
+      getDateWallet(dateNow);
+    }
+    if (dateWallet?.year !== dateNow.year) {
+      newDayAmount(4);
+      getDateWallet(dateNow);
+    }
+  }, []);
+
+  useMemo(() => {
+    if (!!goals) {
+      goals.map((item) => {
+        const percentage = ((item.amount / item.total) * 100).toFixed(0);
+        const isPercent = !isFinite(Number(percentage)) ? 0 : percentage;
+        if (isPercent >= 999) {
+          item.percent = 999;
+        }
+        if (isPercent <= 999) {
+          item.percent = Number(isPercent);
+        }
+        if (item.percent > 100) {
+          const alert = {
+            id: item.id,
+            name: item.name,
+          };
+          setTimeout(() => showAlert(alert), 10);
+        }
+      });
+    }
+  }, [balance, modal]);
+
+  const changeBalance = (modal: string, id = 0) => {
     setModal(true);
     setWhatIsModal(modal);
     setId(id);
-    setGoalName(name);
-    setPercent(percent);
   };
 
   return (
@@ -42,12 +90,13 @@ const Wallet = ({}): ReactElement => {
         name={whatIsModal}
         id={id}
         balance={balance}
-        goalName={goalName}
-        percent={percent}
       />
       <SafeAreaView>
         <View style={[styles.headerBlock]}>
-          <Text style={styles.textMoney}>${balance}</Text>
+          <Text style={styles.textMoney}>
+            {currency}
+            {balance}
+          </Text>
           <Text style={styles.descriptionText}>{I18n.t('balance')}</Text>
           <View style={styles.moneyButtons}>
             <Androw style={[styles.shadow]}>
@@ -75,17 +124,22 @@ const Wallet = ({}): ReactElement => {
           <Androw style={[styles.shadow]}>
             {goals.map((item) => (
               <View style={styles.planBlock} key={item.id}>
-                <ProgressBar percentage={item.percent} />
+                <ProgressBar
+                  percentage={item.percent}
+                  overlimit={item.amount > item.total ? true : false}
+                />
                 <View>
                   <Text style={styles.planText}>{item.name}</Text>
-                  <Text style={styles.planText}>
-                    {item.total} - {currency}
-                  </Text>
+                  {!!item.total ? (
+                    <Text style={styles.planText}>
+                      {item.amount} - {item.total}
+                    </Text>
+                  ) : (
+                    <Text style={styles.planText}>{I18n.t('goal')}</Text>
+                  )}
                 </View>
                 <TouchableOpacity
-                  onPress={() =>
-                    changeBalance('balance', item.id, item.name, item.percent)
-                  }
+                  onPress={() => changeBalance('balance', item.id)}
                 >
                   <Icon style={[styles.icons]} name={'add'} />
                 </TouchableOpacity>
@@ -164,7 +218,7 @@ const styles = StyleSheet.create({
     color: '#000000',
   },
   planText: {
-    fontSize: 20,
+    fontSize: 17,
     fontFamily: 'serif',
     opacity: 0.8,
     textAlign: 'center',

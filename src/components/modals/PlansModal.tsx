@@ -17,8 +17,6 @@ interface IPlansModal {
   id: number;
   children?: never;
   balance: number;
-  goalName: string;
-  percent: number;
 }
 
 const PlansModal = ({
@@ -27,8 +25,6 @@ const PlansModal = ({
   name,
   id,
   balance,
-  goalName,
-  percent,
 }: IPlansModal): ReactElement => {
   const theme = useTypedSelector((state) => state.switchTheme.theme);
   const styles = theme ? lightTheme : { ...lightTheme, ...darkTheme };
@@ -40,7 +36,7 @@ const PlansModal = ({
     if (id !== 0) {
       getGoalId(id);
     }
-  }, [id]);
+  });
 
   const addNewGoal = () => {
     if (name === 'increase') {
@@ -49,16 +45,19 @@ const PlansModal = ({
     if (name === 'decrease') {
       changeBalance(balance - Number(sum));
     }
-    if (name === 'balance' && !!id) {
-      const updateGoal = {
-        name: goalName,
-        total: Number(sum),
-        percent: percent,
-        id: id,
-      };
-      changeGoal(updateGoal);
+    if (name === 'balance' && !!id && sum.length < 11) {
+      changeGoal(Number(sum));
+    }
+    if (sum.length > 11) {
+      Toast.show({
+        text: I18n.t('maxSum'),
+        buttonText: 'ok',
+        type: 'warning',
+        duration: 5000,
+      });
     }
     setModal(false);
+    setSum('');
   };
 
   useEffect(() => {
@@ -87,7 +86,7 @@ const PlansModal = ({
         <Animated.View style={{ ...styles.content, opacity: fadeAnim }}>
           <View style={styles.contentBlock}>
             <Text numberOfLines={1} style={styles.categoryName}>
-              change sum
+              {I18n.t('changeSum')}
             </Text>
             <Item>
               <Input

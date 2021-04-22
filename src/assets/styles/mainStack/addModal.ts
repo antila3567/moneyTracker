@@ -79,7 +79,7 @@ export const lightTheme = StyleSheet.create({
     width: 130,
     padding: 10,
     elevation: 4,
-    backgroundColor: '#00BFFF',
+    backgroundColor: '#006586',
   },
   btnCLose: {
     marginTop: 10,
@@ -97,7 +97,7 @@ export const lightTheme = StyleSheet.create({
     fontSize: 17,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: '#141414',
+    color: '#fff',
     fontFamily: 'serif',
   },
   iconsImg: {

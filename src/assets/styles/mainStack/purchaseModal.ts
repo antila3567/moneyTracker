@@ -58,7 +58,7 @@ export const lightTheme = StyleSheet.create({
     borderRadius: 10,
     width: 150,
     padding: 10,
-    backgroundColor: '#00BFFF',
+    backgroundColor: '#006586',
     elevation: 10,
     borderColor: '#ADD8E6',
     borderWidth: 1,
@@ -66,7 +66,7 @@ export const lightTheme = StyleSheet.create({
   closeBtn: {
     width: 130,
     padding: 10,
-    marginTop:10,
+    marginTop: 10,
   },
   closeBtnText: {
     fontSize: 17,
@@ -78,7 +78,7 @@ export const lightTheme = StyleSheet.create({
     fontSize: 17,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: '#141414',
+    color: '#fff',
     fontFamily: 'serif',
   },
 });

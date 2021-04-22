@@ -63,4 +63,10 @@ export default {
   decrease: 'decrease',
   goal: 'add goal',
   period: 'period',
+  daily: 'daily budget',
+  weakly: 'weakly budget',
+  month: 'month budget',
+  year: 'year budget',
+  maxSum: 'max 10 numbers',
+  changeSum: 'change the amount',
 };

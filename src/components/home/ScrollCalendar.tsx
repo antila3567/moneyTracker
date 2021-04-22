@@ -8,24 +8,11 @@ import {
   ScrollView,
 } from 'react-native';
 import Androw from 'react-native-androw';
-import I18n from '../../localization/locale';
+import { monthA } from '../../utils/formatters/dataFormatter';
 
 const ScrollCalendar = (): ReactElement => {
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth() + 1);
-  const monthA = [
-    { title: I18n.t('1'), number: 1 },
-    { title: I18n.t('2'), number: 2 },
-    { title: I18n.t('3'), number: 3 },
-    { title: I18n.t('4'), number: 4 },
-    { title: I18n.t('5'), number: 5 },
-    { title: I18n.t('6'), number: 6 },
-    { title: I18n.t('7'), number: 7 },
-    { title: I18n.t('8'), number: 8 },
-    { title: I18n.t('9'), number: 9 },
-    { title: I18n.t('10'), number: 10 },
-    { title: I18n.t('11'), number: 11 },
-    { title: I18n.t('12'), number: 12 },
-  ];
+
   return (
     <SafeAreaView>
       <View style={[styles.container]}>
@@ -40,7 +27,7 @@ const ScrollCalendar = (): ReactElement => {
                       : [
                           styles.days,
                           styles.shadow,
-                          { backgroundColor: '#00e0fa' },
+                          { backgroundColor: '#006586' },
                         ]
                   }
                   onPress={() => setCurrentMonth(item.number)}
@@ -48,12 +35,20 @@ const ScrollCalendar = (): ReactElement => {
                 >
                   <View style={styles.textBlock}>
                     <View key={index}>
-                      <Text>{item.title}</Text>
+                      <Text
+                        style={currentMonth == item.number && { color: '#fff' }}
+                      >
+                        {item.title}
+                      </Text>
                     </View>
                   </View>
                   <View style={styles.textBlock}>
                     <View>
-                      <Text>{item.number}</Text>
+                      <Text
+                        style={currentMonth == item.number && { color: '#fff' }}
+                      >
+                        {item.number}
+                      </Text>
                     </View>
                   </View>
                 </TouchableOpacity>

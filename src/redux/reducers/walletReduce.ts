@@ -3,16 +3,19 @@ import {
   WalletActions,
   WalletActionsTypes,
 } from './../types/walletTypes';
+import I18n from '../../localization/locale';
 
 const init: IWalletState = {
   goals: [
-    { name: 'daily budget', total: 0, percent: 0, id: 1 },
-    { name: 'weakly budget', total: 0, percent: 0, id: 2 },
-    { name: 'month budget', total: 0, percent: 0, id: 3 },
-    { name: 'year budget', total: 0, percent: 0, id: 4 },
+    { name: I18n.t('daily'), amount: 0, total: 0, percent: 0, id: 1 },
+    { name: I18n.t('weakly'), amount: 0, total: 0, percent: 0, id: 2 },
+    { name: I18n.t('month'), amount: 0, total: 0, percent: 0, id: 3 },
+    { name: I18n.t('year'), amount: 0, total: 0, percent: 0, id: 4 },
   ],
+  overLimit: [],
+  date: null,
   balance: 0,
-  icon: null,
+  icon: '$',
   id: null,
 };
 
@@ -22,11 +25,57 @@ const walletReducer = (state = init, action: WalletActions): IWalletState => {
       return { ...state, id: action.payload };
     case WalletActionsTypes.CHANGE_GOAL:
       const filterGoals = state.goals.filter((item) => item.id !== state.id);
-      const newGoals = [...filterGoals, action.payload];
-      const sortGoal = newGoals.sort((a, b) => (a.id < b.id ? -1 : 1));
-      return { ...state, goals: sortGoal };
+      const filterGoal = state.goals.filter((item) => item.id === state.id);
+      const updateGoal = filterGoal.map((item) => {
+        item.total = action.payload;
+        return item;
+      });
+      const sortGoals = [...filterGoals, ...updateGoal];
+      const newGoals = sortGoals.sort((a, b) => (a.id < b.id ? -1 : 1));
+      return { ...state, goals: newGoals };
     case WalletActionsTypes.CHANGE_BALANCE:
       return { ...state, balance: action.payload };
+    case WalletActionsTypes.NEW_PURCHASE:
+      const addPurchase = state.goals.map((item) => {
+        if (item.total !== 0) {
+          item.amount = item.amount + action.payload;
+        }
+        return item;
+      });
+      return { ...state, goals: addPurchase };
+    case WalletActionsTypes.SHOW_ALERT:
+      const isNew = !!state.overLimit.find(
+        (item) => item.id === action.payload.id
+      );
+      const notify = [...state.overLimit, action.payload];
+      const notification = notify.sort((a, b) => (a.id < b.id ? -1 : 1));
+      if (!isNew) {
+        return { ...state, overLimit: notification };
+      } else {
+        return state;
+      }
+    case WalletActionsTypes.GET_DATE:
+      return { ...state, date: action.payload };
+    case WalletActionsTypes.UPDATE_AMOUNT:
+      const goalsCutId = state.goals.filter(
+        (item) => item.id !== action.payload
+      );
+
+      const goalsCutAnotherId = state.goals.filter(
+        (item) => item.id === action.payload
+      );
+
+      const updateAmount = goalsCutAnotherId.map((item) => {
+        item.amount = 0;
+        return item;
+      });
+
+      const concatGoals = [...goalsCutId, ...updateAmount];
+
+      const updateAmountGoals = concatGoals.sort((a, b) =>
+        a.id < b.id ? -1 : 1
+      );
+      return { ...state, goals: updateAmountGoals };
     default:
       const isAllActions: never = action;
   }

@@ -8,8 +8,10 @@ import { useActions } from '../../hooks/useActions';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import I18n from '../../localization/locale';
 import { lightTheme, darkTheme } from '../../assets/styles/mainStack/addModal';
+import { useNavigation } from '@react-navigation/native';
 
 const AddPayBlock = (): ReactElement => {
+  const navigation = useNavigation();
   const category = useTypedSelector((state) => state.home);
   const lastId = Math.max(...category.categories.map((item) => item.id));
   const {
@@ -34,11 +36,12 @@ const AddPayBlock = (): ReactElement => {
     } else {
       const data = {
         color: category.colors,
-        expenses: [{ id: 0, total: 0.1 }],
+        expenses: [{ id: 0, total: 0.01 }],
         icons: category.icons,
         id: !isFinite(lastId) ? 1 : lastId + 1,
         name: category.name,
       };
+      navigation.navigate('Home', {});
       createNewCategory(data);
       openAddModal(false);
     }
