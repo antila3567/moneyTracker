@@ -1,4 +1,4 @@
-import React, { ReactElement, useMemo, useState } from 'react';
+import React, { ReactElement, useEffect, useMemo, useState } from 'react';
 import {
   View,
   Text,
@@ -12,11 +12,12 @@ import { grad } from '../../assets/styles/blocks/gradient';
 import Androw from 'react-native-androw';
 import ProgressBar from '../../components/other/ProgressBar';
 import { Icon } from 'native-base';
-import I18n from '../../localization/locale';
 import PlansModal from '../../components/modals/PlansModal';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { useActions } from '../../hooks/useActions';
 import moment from 'moment-timezone';
+import I18n from '../../localization/locale';
+import translator from '../../utils/formatters/translator';
 
 const Wallet = ({}): ReactElement => {
   const { showAlert, getDateWallet, newDayAmount } = useActions();
@@ -27,6 +28,7 @@ const Wallet = ({}): ReactElement => {
   const balance = useTypedSelector((state) => state.wallet.balance);
   const dateWallet = useTypedSelector((state) => state.wallet.date);
   const currency = useTypedSelector((state) => state.wallet.icon);
+  translator();
 
   useMemo(() => {
     const date = new Date();
@@ -52,7 +54,7 @@ const Wallet = ({}): ReactElement => {
       newDayAmount(4);
       getDateWallet(dateNow);
     }
-  }, []);
+  }, [balance]);
 
   useMemo(() => {
     if (!!goals) {
@@ -129,7 +131,12 @@ const Wallet = ({}): ReactElement => {
                   overlimit={item.amount > item.total ? true : false}
                 />
                 <View>
-                  <Text style={styles.planText}>{item.name}</Text>
+                  <Text style={styles.planText}>
+                    {item.name === 'daily' && I18n.t('daily')}
+                    {item.name === 'weakly' && I18n.t('weakly')}
+                    {item.name === 'month' && I18n.t('month')}
+                    {item.name === 'year' && I18n.t('year')}
+                  </Text>
                   {!!item.total ? (
                     <Text style={styles.planText}>
                       {item.amount} - {item.total}

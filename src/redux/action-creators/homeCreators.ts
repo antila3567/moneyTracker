@@ -92,9 +92,16 @@ export const addNewExpense = (expense: any[]) => {
   };
 };
 
-export const removeAmountExpense = (expense: object) => {
+export const removeAmountExpense = (id: number) => {
   return {
     type: HomeActionTypes.DECREMENT_AMOUNT,
-    payload: expense,
+    payload: id,
+  };
+};
+
+export const getCategoryAmountId = (id: number | null) => {
+  return {
+    type: HomeActionTypes.GET_AMOUNT_ID,
+    payload: id,
   };
 };

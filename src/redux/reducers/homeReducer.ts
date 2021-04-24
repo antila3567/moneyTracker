@@ -15,6 +15,7 @@ const init: IHomeState = {
   categoryName: '',
   addModal: false,
   isPurchaseModal: false,
+  id: null,
 };
 
 const homeReducer = (state = init, action: IHomeActions): IHomeState => {
@@ -56,11 +57,33 @@ const homeReducer = (state = init, action: IHomeActions): IHomeState => {
       const filterCategory = state.categories.filter(
         (item) => item.id !== state.categoryId
       );
-      const newAmount = [...filterCategory, action.payload];
+      const sortAmount = [...filterCategory, action.payload];
+      const newGoals = sortAmount.sort((a, b) => (a.id < b.id ? -1 : 1));
       return {
         ...state,
-        categories: newAmount
+        categories: newGoals,
       };
+    case HomeActionTypes.GET_AMOUNT_ID: {
+      return { ...state, id: action.payload };
+    }
+    case HomeActionTypes.DECREMENT_AMOUNT:
+      const cutCategories = state.categories.filter(
+        (item) => item.id === state.id
+      );
+      const cutCategoriesId = state.categories.filter(
+        (item) => item.id !== state.id
+      );
+      const mapCategories = cutCategories.map((item) => {
+        const expenses: any = item.expenses.filter(
+          (fil) => fil.id !== action.payload
+        );
+        item.expenses = expenses;
+        return item;
+      });
+      const sortCategories = [...cutCategoriesId, ...mapCategories];
+      const updateCat = sortCategories.sort((a, b) => (a.id < b.id ? -1 : 1));
+
+      return { ...state, categories: updateCat };
     default:
       const isAllActions: never = action;
   }

@@ -6,14 +6,13 @@ import { selectIcon } from '../../assets/styles/blocks/icons';
 import { selectColor } from '../../assets/styles/blocks/theme';
 import { useActions } from '../../hooks/useActions';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
-import I18n from '../../localization/locale';
+import I18n from 'i18next'
 import { lightTheme, darkTheme } from '../../assets/styles/mainStack/addModal';
 import { useNavigation } from '@react-navigation/native';
 
 const AddPayBlock = (): ReactElement => {
   const navigation = useNavigation();
   const category = useTypedSelector((state) => state.home);
-  const lastId = Math.max(...category.categories.map((item) => item.id));
   const {
     openAddModal,
     newCategoryName,
@@ -21,7 +20,7 @@ const AddPayBlock = (): ReactElement => {
     newCategoryColors,
     createNewCategory,
   } = useActions();
-  const theme = useTypedSelector((state) => state.switchTheme.theme);
+  const theme = useTypedSelector((state) => state.settings.theme);
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const styles = theme ? lightTheme : { ...lightTheme, ...darkTheme };
 
@@ -36,10 +35,11 @@ const AddPayBlock = (): ReactElement => {
     } else {
       const data = {
         color: category.colors,
-        expenses: [{ id: 0, total: 0.01 }],
+        expenses: [{ id: 0, total: 0.000001, date: new Date() }],
         icons: category.icons,
-        id: !isFinite(lastId) ? 1 : lastId + 1,
+        id: Math.random() * 10000000000000,
         name: category.name,
+        description: '',
       };
       navigation.navigate('Home', {});
       createNewCategory(data);

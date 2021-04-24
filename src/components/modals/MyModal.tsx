@@ -7,17 +7,20 @@ import {
   Animated,
   TouchableOpacity,
   Dimensions,
+  Text,
+  View,
 } from 'react-native';
 
 interface IMyModalProps {
   modalVisible: boolean;
-  onClose: (bool: boolean) => void;
+  onClose: (bool: boolean, val?: string) => void;
   children?: ReactNode;
   style?: StyleProp<ViewStyle>;
+  data?: any[];
 }
 
 const MyModal = React.memo(
-  ({ modalVisible, onClose, children, style }: IMyModalProps): ReactElement => {
+  ({ modalVisible, onClose, children, data }: IMyModalProps): ReactElement => {
     const scaleValue = useRef(new Animated.Value(0)).current;
 
     const animation = () => {
@@ -39,13 +42,7 @@ const MyModal = React.memo(
         <TouchableOpacity
           activeOpacity={1}
           onPress={() => onClose(false)}
-          style={[
-            styles.modalBackground,
-            {
-              backgroundColor: '#000',
-              opacity: 0.7,
-            },
-          ]}
+          style={[styles.modalBackground]}
         >
           <TouchableOpacity activeOpacity={1}>
             <Animated.View
@@ -56,6 +53,18 @@ const MyModal = React.memo(
                 },
               ]}
             >
+              {!!data &&
+                data.map((item, index) => (
+                  <View key={index}>
+                    <TouchableOpacity
+                      onPress={() => onClose(true, item.value)}
+                      style={styles.card}
+                    >
+                      <Text>{item.label}</Text>
+                      <Text>{item.flag}</Text>
+                    </TouchableOpacity>
+                  </View>
+                ))}
               {children}
             </Animated.View>
           </TouchableOpacity>
@@ -73,10 +82,22 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     width: Dimensions.get('screen').width / 1.2,
-    backgroundColor: 'white',
     borderRadius: 16,
     paddingHorizontal: 40,
     paddingVertical: 30,
+  },
+  closeBtn: {
+    textAlign: 'right',
+    fontSize: 40,
+  },
+  card: {
+    backgroundColor: '#F0FFFF',
+    marginVertical: 10,
+    padding: 20,
+    elevation: 10,
+    borderRadius: 12,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });
 

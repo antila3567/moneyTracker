@@ -1,10 +1,6 @@
 import { IPiePart } from './../../utils/types/homeTypes';
 
 export type Categories = {
-  id: number;
-  name: string;
-  icons: string;
-  color: string;
   expenses: [
     {
       id: number;
@@ -13,8 +9,13 @@ export type Categories = {
       location: string;
       total: number;
       status: string;
+      date: string;
     }
   ];
+  id: number;
+  name: string;
+  icons: number | string | any;
+  color: string;
 };
 
 export interface IHomeState {
@@ -28,6 +29,7 @@ export interface IHomeState {
   isPurchaseModal: boolean;
   categoryId: number | null;
   categoryName: string;
+  id: null | number;
 }
 
 export enum HomeActionTypes {
@@ -45,11 +47,12 @@ export enum HomeActionTypes {
   GET_CATEGORY_NAME = 'GET_CATEGORY_NAME',
   INCREMENT_AMOUNT = 'INCREMENT_AMOUNT',
   DECREMENT_AMOUNT = 'DECREMENT_AMOUNT',
+  GET_AMOUNT_ID = 'GET_AMOUNT_ID',
 }
 
 interface DecrementAmount {
   type: HomeActionTypes.DECREMENT_AMOUNT;
-  payload: any[];
+  payload: number;
 }
 
 interface IncrementAmount {
@@ -114,6 +117,10 @@ interface AddModal {
   type: HomeActionTypes.ADD_MODAL;
   payload: boolean;
 }
+interface GetId {
+  type: HomeActionTypes.GET_AMOUNT_ID;
+  payload: number;
+}
 
 export type IHomeActions =
   | PushData
@@ -129,4 +136,5 @@ export type IHomeActions =
   | getCategoryName
   | IncrementAmount
   | DecrementAmount
-  | CreateNewCategory;
+  | CreateNewCategory
+  | GetId;

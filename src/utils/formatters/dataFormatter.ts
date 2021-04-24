@@ -1,5 +1,3 @@
-import I18n from '../../localization/locale';
-
 export function format(date: string | number) {
   const orderDate = new Date(date);
   let minutes: string | number = orderDate.getMinutes();
@@ -113,16 +111,16 @@ export const toNumberMonth = (month: string, numMonth: number) => {
 };
 
 export const monthA = [
-  { title: I18n.t('1'), number: 1 },
-  { title: I18n.t('2'), number: 2 },
-  { title: I18n.t('3'), number: 3 },
-  { title: I18n.t('4'), number: 4 },
-  { title: I18n.t('5'), number: 5 },
-  { title: I18n.t('6'), number: 6 },
-  { title: I18n.t('7'), number: 7 },
-  { title: I18n.t('8'), number: 8 },
-  { title: I18n.t('9'), number: 9 },
-  { title: I18n.t('10'), number: 10 },
-  { title: I18n.t('11'), number: 11 },
-  { title: I18n.t('12'), number: 12 },
+  { title: '1', number: 1 },
+  { title: '2', number: 2 },
+  { title: '3', number: 3 },
+  { title: '4', number: 4 },
+  { title: '5', number: 5 },
+  { title: '6', number: 6 },
+  { title: '7', number: 7 },
+  { title: '8', number: 8 },
+  { title: '9', number: 9 },
+  { title: '10', number: 10 },
+  { title: '11', number: 11 },
+  { title: '12', number: 12 },
 ];

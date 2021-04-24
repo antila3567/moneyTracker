@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 export const lightTheme = StyleSheet.create({
   wrapper: {
@@ -25,7 +25,7 @@ export const lightTheme = StyleSheet.create({
     textAlign: 'center',
     fontSize: 35,
     color: '#000',
-    fontFamily:'serif'
+    fontFamily: 'serif',
   },
   loginInputs: {
     marginTop: 10,
@@ -45,7 +45,7 @@ export const lightTheme = StyleSheet.create({
     color: '#000',
     fontWeight: 'bold',
     fontSize: 18,
-    fontFamily:'serif'
+    fontFamily: 'serif',
   },
   socialImg: {
     marginLeft: 5,
@@ -55,7 +55,7 @@ export const lightTheme = StyleSheet.create({
   forgotPass: {
     fontSize: 14,
     color: 'gray',
-    fontFamily:'serif'
+    fontFamily: 'serif',
   },
   loginButtons: {
     marginTop: 20,
@@ -64,7 +64,7 @@ export const lightTheme = StyleSheet.create({
   },
   loginBtn: {
     width: '45%',
-    borderWidth: 3,
+    borderWidth: 2,
     borderRadius: 10,
     borderColor: '#ADD8E6',
     paddingHorizontal: 2,
@@ -75,10 +75,9 @@ export const lightTheme = StyleSheet.create({
   },
   loginBtnText: {
     textAlign: 'center',
-    fontWeight: 'bold',
     fontSize: 20,
     color: '#000',
-    fontFamily:'serif'
+    fontFamily: 'serif',
   },
   signUpBtn: {
     marginTop: 25,
@@ -89,11 +88,11 @@ export const lightTheme = StyleSheet.create({
     fontSize: 18,
     color: 'gray',
     fontWeight: 'bold',
-    fontFamily:'serif'
+    fontFamily: 'serif',
   },
   signUpButton: {
     width: '60%',
-    borderWidth: 3,
+    borderWidth: 2,
     borderRadius: 10,
     borderColor: '#ADD8E6',
     paddingHorizontal: 2,
@@ -130,11 +129,11 @@ export const darkTheme = StyleSheet.create({
     textAlign: 'center',
     fontSize: 35,
     color: '#d3d3d3',
-    fontFamily:'serif'
+    fontFamily: 'serif',
   },
   loginBtn: {
     width: '45%',
-    borderWidth: 3,
+    borderWidth: 2,
     borderRadius: 10,
     borderColor: '#d3d3d3',
     paddingHorizontal: 2,
@@ -145,7 +144,7 @@ export const darkTheme = StyleSheet.create({
   },
   signUpButton: {
     width: '60%',
-    borderWidth: 3,
+    borderWidth: 2,
     borderRadius: 10,
     borderColor: '#d3d3d3',
     paddingHorizontal: 2,
@@ -159,12 +158,12 @@ export const darkTheme = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 22,
     color: '#d3d3d3',
-    fontFamily:'serif'
+    fontFamily: 'serif',
   },
   socialText: {
     color: '#d3d3d3',
     fontWeight: 'bold',
     fontSize: 18,
-    fontFamily:'serif',
+    fontFamily: 'serif',
   },
 });

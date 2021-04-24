@@ -3,14 +3,13 @@ import {
   WalletActions,
   WalletActionsTypes,
 } from './../types/walletTypes';
-import I18n from '../../localization/locale';
 
 const init: IWalletState = {
   goals: [
-    { name: I18n.t('daily'), amount: 0, total: 0, percent: 0, id: 1 },
-    { name: I18n.t('weakly'), amount: 0, total: 0, percent: 0, id: 2 },
-    { name: I18n.t('month'), amount: 0, total: 0, percent: 0, id: 3 },
-    { name: I18n.t('year'), amount: 0, total: 0, percent: 0, id: 4 },
+    { name: 'daily', amount: 0, total: 0, percent: 0, id: 1 },
+    { name: 'weakly', amount: 0, total: 0, percent: 0, id: 2 },
+    { name: 'month', amount: 0, total: 0, percent: 0, id: 3 },
+    { name: 'year', amount: 0, total: 0, percent: 0, id: 4 },
   ],
   overLimit: [],
   date: null,

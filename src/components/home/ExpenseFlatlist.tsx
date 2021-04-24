@@ -50,6 +50,11 @@ const ExpenseFlatlist = ({ item, styles, selected }: IBlock): ReactElement => {
               {currency} - {Math.floor(item.y)}
             </Text>
           </View>
+          <View>
+            <Text style={[styles.currency, { color: flatListText }]}>
+              {item.percentFlat}%
+            </Text>
+          </View>
         </View>
       </TouchableOpacity>
     </>

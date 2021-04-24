@@ -1,5 +1,4 @@
-import { useNavigation } from '@react-navigation/native';
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import {
   View,
   Text,
@@ -7,16 +6,25 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 import { grad } from '../../assets/styles/blocks/gradient';
 import { lightTheme, darkTheme } from '../../assets/styles/onboarding';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
-import I18n from '../../localization/locale';
+import I18n from 'i18next'
+import * as RNLocalize from 'react-native-localize';
+import { useTranslation } from 'react-i18next';
 
-const OnboardingScreen = ({}):ReactElement => {
+const OnboardingScreen = ({}): ReactElement => {
   const navigation = useNavigation();
-  const switchColor = useTypedSelector((state) => state.switchTheme.theme);
+  const switchColor = useTypedSelector((state) => state.settings.theme);
   const styles = switchColor ? lightTheme : { ...lightTheme, ...darkTheme };
+  const locales = RNLocalize.getLocales();
+  const { i18n } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(locales[0].languageCode);
+  }, []);
 
   const goToAuth = (): void => {
     navigation.navigate('SignIn');
@@ -24,7 +32,7 @@ const OnboardingScreen = ({}):ReactElement => {
 
   return (
     <LinearGradient colors={grad.lightBackground} style={styles.wrapper}>
-      <SafeAreaView>
+      <SafeAreaView style={{ flex: 1 }}>
         <View style={styles.headerBlock}>
           <Image
             style={styles.logoImg}
@@ -47,15 +55,11 @@ const OnboardingScreen = ({}):ReactElement => {
             {I18n.t('onboardContent')}
           </Text>
         </View>
-        <TouchableOpacity style={styles.btnBlock} onPress={() => goToAuth()}>
-          <View style={styles.mainCircle}>
-            <View style={styles.secondCircle}>
-              <View style={styles.thirtCircle}>
-                <Text style={styles.arrowRight}>→</Text>
-              </View>
-            </View>
-          </View>
-        </TouchableOpacity>
+        <View style={styles.startBlock}>
+          <TouchableOpacity style={styles.btnBlock} onPress={() => goToAuth()}>
+            <Text style={styles.startBtn}>{I18n.t('start')}</Text>
+          </TouchableOpacity>
+        </View>
       </SafeAreaView>
     </LinearGradient>
   );

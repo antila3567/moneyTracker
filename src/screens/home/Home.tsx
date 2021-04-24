@@ -1,27 +1,27 @@
 import React, { ReactElement, useMemo } from 'react';
-import { View, FlatList, Alert } from 'react-native';
+import { View, FlatList } from 'react-native';
 import { lightTheme, darkTheme } from '../../assets/styles/mainStack/home';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import CategoriesBlock from '../../components/home/CategoriesBlock';
-import { ICategories, IItem } from '../../utils/types/homeTypes';
+import { ICategories } from '../../utils/types/homeTypes';
 import ChartPie from '../../components/home/ChartPie';
-import { useActions } from '../../hooks/useActions';
-import I18n from '../../localization/locale';
 import { useNavigation } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 import { grad } from '../../assets/styles/blocks/gradient';
 import ScrollCalendar from '../../components/home/ScrollCalendar';
 import PurchaseModal from '../../components/modals/ PurchaseModal';
 import { Toast } from 'native-base';
+import { useActions } from '../../hooks/useActions';
+import I18n from 'i18next'
 
 const HomeScreen = ({}): ReactElement => {
+  const { getCategoryAmountId } = useActions();
   const navigation = useNavigation();
   const switchColor: boolean = useTypedSelector(
-    (state) => state.switchTheme.theme
+    (state) => state.settings.theme
   );
   const styles = switchColor ? lightTheme : { ...lightTheme, ...darkTheme };
   const categories = useTypedSelector((state) => state.home.categories);
-  const { removeCategory } = useActions();
   const over = useTypedSelector((state) => state.wallet.overLimit);
 
   useMemo(() => {
@@ -39,19 +39,9 @@ const HomeScreen = ({}): ReactElement => {
     }, 2000);
   }, [over]);
 
-  const historyCategory = (category: IItem) => {
-    navigation.navigate('History', {
-      historyCategory: category,
-    });
-  };
-
-  const removeCurrentCategory = (id: number) => {
-    Alert.alert(I18n.t('removeCategory'), I18n.t('categoryInfo'), [
-      {
-        text: I18n.t('cancelBtn'),
-      },
-      { text: I18n.t('okBtn'), onPress: () => removeCategory(id) },
-    ]);
+  const historyCategory = (id: number) => {
+    getCategoryAmountId(id);
+    navigation.navigate('History', {});
   };
 
   const renderBlock = ({ item }: ICategories) => {

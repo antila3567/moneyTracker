@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export const lightTheme = StyleSheet.create({
   wrapper: {
-    flex: 1,
+    flexGrow: 1,
   },
   headerBlock: {
     height: 50,
@@ -26,45 +26,37 @@ export const lightTheme = StyleSheet.create({
     fontSize: 35,
     textAlign: 'center',
     fontWeight: 'bold',
-    fontFamily:'serif',
+    fontFamily: 'serif',
   },
   descrContentText: {
     marginTop: 20,
     textAlign: 'left',
     fontSize: 24,
     color: '#707070',
-    fontFamily:'serif',
+    fontFamily: 'serif',
+  },
+  startBlock: {
+    flexGrow: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    paddingBottom: 10,
   },
   btnBlock: {
-    alignItems: 'center',
-  },
-  mainCircle: {
-    borderWidth: 3,
-    width: 100,
-    height: 100,
-    borderRadius: 100,
-    borderColor: '#000',
-    backgroundColor: '#fff',
-  },
-  secondCircle: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 95,
-  },
-  thirtCircle: {
+    width: '50%',
     borderWidth: 2,
-    borderColor: '#000',
-    width: 70,
-    height: 70,
-    borderRadius: 100,
-    backgroundColor: '#FFFAFA',
+    borderRadius: 10,
+    borderColor: '#ADD8E6',
+    paddingHorizontal: 2,
+    paddingVertical: 13,
+    backgroundColor: '#F0FFFF',
+    shadowColor: '#000',
+    elevation: 10,
   },
-  arrowRight: {
-    textAlign: 'center',
-    fontWeight: 'bold',
-    fontSize: 40,
+  startBtn: {
+    fontSize: 20,
+    fontFamily: 'serif',
     color: '#000',
-    fontFamily:'serif',
+    textAlign: 'center',
   },
 });
 
@@ -78,6 +70,23 @@ export const darkTheme = StyleSheet.create({
     textAlign: 'center',
     fontWeight: 'bold',
     color: '#fff',
-    fontFamily:'serif',
+    fontFamily: 'serif',
+  },
+  btnBlock: {
+    width: '50%',
+    borderWidth: 2,
+    borderRadius: 10,
+    borderColor: '#d3d3d3',
+    paddingHorizontal: 2,
+    paddingVertical: 13,
+    backgroundColor: '#000',
+    shadowColor: '#fff',
+    elevation: 10,
+  },
+  startBtn: {
+    fontSize: 20,
+    fontFamily: 'serif',
+    color: '#fff',
+    textAlign: 'center',
   },
 });

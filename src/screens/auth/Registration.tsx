@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { lightTheme, darkTheme } from '../../assets/styles/auth';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
-import I18n from '../../localization/locale';
+import I18n from 'i18next'
 import auth from '@react-native-firebase/auth';
 import { useActions } from '../../hooks/useActions';
 import { grad } from '../../assets/styles/blocks/gradient';
@@ -17,7 +17,7 @@ import LinearGradient from 'react-native-linear-gradient';
 
 const Registration = ():ReactElement => {
   // const expressionEmail = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-  const switchColor = useTypedSelector((state) => state.switchTheme.theme);
+  const switchColor = useTypedSelector((state) => state.settings.theme);
   const styles = switchColor ? lightTheme : { ...lightTheme, ...darkTheme };
   const signUp = useTypedSelector((state) => state.auth);
   const {

@@ -108,7 +108,7 @@ export const lightTheme = StyleSheet.create({
   },
   pieCircle: {
     position: 'absolute',
-    top: Dimensions.get('screen').height / 5.8,
+    top: Dimensions.get('screen').height / 5.7,
     width: Dimensions.get('screen').width,
     paddingLeft: 5,
   },

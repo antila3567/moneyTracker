@@ -1,5 +1,6 @@
 export default {
   //ONBOARD
+  start: 'Get started',
   onboardTitle: 'what is this?',
   onboardContent:
     'Our application was created to help you properly monitor and distribute your finances. You no longer need to turn on your computer every time to add data to the table, now you can automate this process!',
@@ -33,6 +34,7 @@ export default {
   close: 'close',
   create: 'create',
   emptyField: 'enter name category',
+  isHave: 'this category already exists',
   //REMOVEMODAL
   removeCategory: 'delete category?',
   categoryInfo: 'all information will be deleted!',
@@ -69,4 +71,10 @@ export default {
   year: 'year budget',
   maxSum: 'max 10 numbers',
   changeSum: 'change the amount',
+  //History
+  allCat: 'All categories',
+  allTrans: 'all transactions',
+  wholeAmount: 'the sum of all purchases',
+  clear1: 'There have been no operations yet',
+  clear2: 'create a category',
 };

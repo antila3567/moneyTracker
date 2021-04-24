@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useEffect, useMemo, useState } from 'react';
 import { Text, View, FlatList } from 'react-native';
 import Svg from 'react-native-svg';
 import { VictoryPie } from 'victory-native';
@@ -6,6 +6,7 @@ import { useActions } from '../../hooks/useActions';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import I18n from '../../localization/locale';
 import { chartFormatter } from '../../utils/formatters/chartFormatter';
+import translator from '../../utils/formatters/translator';
 import { IChartPie, IPieTrans } from '../../utils/types/homeTypes';
 import ExpenseFlatlist from './ExpenseFlatlist';
 
@@ -16,16 +17,15 @@ const ChartPie = ({ categories, styles }: IChartPie): ReactElement => {
   const formatChart = chartFormatter();
   const chart = formatChart;
   const colors = chart.map((item) => item.color);
-  const totalExpenseCount = chart.reduce(
-    (a, b) => a + (b.expenseCount || 0),
-    0
-  );
-  const totalExpense = chart.reduce((a, b) => a + (b.y || 0), 0);
+  const allCount = chart.reduce((a, b) => a + (b.expenseCount || 0), 0);
+  const allTotal = chart.reduce((a, b) => a + (b.y || 0), 0);
+  translator();
 
-  const setSelectCategoryByName = (name: string, id: number) => {
-    const category = categories.filter((a) => a.name == name);
+
+  const setSelectCategoryByName = (id: number, index: number) => {
+    const category = categories.filter((item) => item.id == id);
     pushCurrentItem(category[0]);
-    scrollToItem(id);
+    scrollToItem(index);
   };
 
   const scrollToItem = (id: number) => {
@@ -55,13 +55,18 @@ const ChartPie = ({ categories, styles }: IChartPie): ReactElement => {
           colorScale={colors}
           labels={(datum) => `${datum.y}`}
           radius={({ datum }) =>
-            selected && selected.name == datum.name ? 140 : 130
+            selected && selected.id == datum.id ? 140 : 130
           }
           innerRadius={50}
           labelRadius={80}
           style={{
             data: { fillOpacity: 0.9, stroke: '#ffffff', strokeWidth: 1.5 },
-            labels: { fontSize: 13, fill: '#ffffff', fontFamily: 'serif' },
+            labels: {
+              fontSize: 13,
+              fill: '#ffffff',
+              fontFamily: 'serif',
+              fontWeight: 'bold',
+            },
           }}
           events={[
             {
@@ -72,7 +77,7 @@ const ChartPie = ({ categories, styles }: IChartPie): ReactElement => {
                     {
                       target: 'labels',
                       mutation: (props) => {
-                        let categoryName = chart[props.index].name;
+                        let categoryName = chart[props.index].id;
                         let id = props.index;
                         setSelectCategoryByName(categoryName, id);
                       },
@@ -84,11 +89,11 @@ const ChartPie = ({ categories, styles }: IChartPie): ReactElement => {
           ]}
         />
       </Svg>
-      {totalExpenseCount !== 0 ? (
+      {allCount !== 0 ? (
         <View style={styles.pieCircle}>
-          <Text style={styles.pieText}>{totalExpense.toFixed(2)}</Text>
+          <Text style={styles.pieText}>{allTotal.toFixed(2)}</Text>
           <Text style={styles.pieText}>{I18n.t('allExpense')}</Text>
-          <Text style={styles.pieText}>{totalExpenseCount}</Text>
+          <Text style={styles.pieText}>{allCount - categories.length}</Text>
         </View>
       ) : null}
       <View>

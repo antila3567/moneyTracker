@@ -3,7 +3,7 @@ import { Input, Item, Toast } from 'native-base';
 import { View, Text, TouchableOpacity, Animated } from 'react-native';
 import Modal from 'react-native-modal';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
-import I18n from '../../localization/locale';
+import I18n from 'i18next'
 import {
   lightTheme,
   darkTheme,
@@ -26,7 +26,7 @@ const PlansModal = ({
   id,
   balance,
 }: IPlansModal): ReactElement => {
-  const theme = useTypedSelector((state) => state.switchTheme.theme);
+  const theme = useTypedSelector((state) => state.settings.theme);
   const styles = theme ? lightTheme : { ...lightTheme, ...darkTheme };
   const { changeBalance, changeGoal, getGoalId } = useActions();
   const [sum, setSum] = useState('');

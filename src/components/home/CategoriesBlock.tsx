@@ -1,12 +1,12 @@
 import React, { ReactElement } from 'react';
 import { Text, TouchableOpacity, Image } from 'react-native';
-import { IBlockItem, IItem } from '../../utils/types/homeTypes';
+import { IBlockItem } from '../../utils/types/homeTypes';
 import Androw from 'react-native-androw';
 
 interface IBlock {
   item: IBlockItem;
   styles: any;
-  historyCategory: (item: IItem) => void;
+  historyCategory: (id: number) => void;
 }
 
 const CategoriesBlock = ({
@@ -18,7 +18,7 @@ const CategoriesBlock = ({
     <Androw style={[styles.shadow]}>
       <TouchableOpacity
         style={styles.blockItem}
-        onPress={() => historyCategory(item)}
+        onPress={() => historyCategory(item.id)}
       >
         <Text numberOfLines={1} style={styles.blockName}>
           {item.name}

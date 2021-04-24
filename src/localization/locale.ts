@@ -1,20 +1,24 @@
-import I18n from 'i18n-js';
-import * as RNLocalize from 'react-native-localize';
-import en from './en/index';
-import ru from './ru/index';
-import ua from './ua/index';
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
+import en from './en';
+import uk from './ua';
+import ru from './ru';
 
-const locales = RNLocalize.getLocales();
+i18n.use(initReactI18next).init({
+  lng: 'en',
+  fallbackLng: 'en',
+  debug: true,
+  resources: {
+    en: {
+      translation: en,
+    },
+    uk: {
+      translation: uk,
+    },
+    ru: {
+      translation: ru,
+    },
+  },
+});
 
-if (Array.isArray(locales)) {
-  I18n.locale = locales[0].languageTag;
-}
-
-I18n.fallbacks = true;
-I18n.translations = {
-  en,
-  ru,
-  ua,
-};
-
-export default I18n;
+export default i18n;

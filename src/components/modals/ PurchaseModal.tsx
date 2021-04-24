@@ -3,7 +3,7 @@ import { Input, Item } from 'native-base';
 import { View, TouchableOpacity, Animated, Text } from 'react-native';
 import Modal from 'react-native-modal';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
-import I18n from '../../localization/locale';
+import I18n from 'i18next'
 import {
   lightTheme,
   darkTheme,
@@ -18,19 +18,21 @@ const PurchaseModal = (): ReactElement => {
     changeBalance,
     addNewPurchase,
   } = useActions();
-  const theme = useTypedSelector((state) => state.switchTheme.theme);
+  const theme = useTypedSelector((state) => state.settings.theme);
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const styles = theme ? lightTheme : { ...lightTheme, ...darkTheme };
   const [am, setAm] = useState('');
   const [newData, setNewData] = useState<any>([]);
   const [pur, setPur] = useState([{}]);
+  const [description, setDescription] = useState('');
   const data = useTypedSelector((state) => state.home.categories);
   const filterData = data.filter((item) => item.id === purchase.categoryId);
   const balance = useTypedSelector((state) => state.wallet.balance);
   const expense = {
-    id: 5,
+    id: Math.random() * 10000000000000,
     total: Number(am),
     date: new Date(),
+    description: description,
   };
 
   const changeCurrentAmount = () => {
@@ -40,7 +42,8 @@ const PurchaseModal = (): ReactElement => {
     addPurchaseModal(false);
     changeBalance(balance - Number(am));
     addNewPurchase(Number(am));
-    setAm('')
+    setAm('');
+    setDescription('');
   };
 
   useEffect(() => {
@@ -91,6 +94,8 @@ const PurchaseModal = (): ReactElement => {
             </Item>
             <Item>
               <Input
+                value={description}
+                onChangeText={(text) => setDescription(text)}
                 style={styles.inputName}
                 placeholder={I18n.t('description')}
               />

@@ -14,6 +14,8 @@ import auth from '@react-native-firebase/auth';
 import AddPayBlock from './components/modals/AddPayModal';
 import I18n from './localization/locale';
 import { kred } from './services/google/kred';
+import * as RNLocalize from 'react-native-localize';
+import { useTranslation } from 'react-i18next';
 
 export default () => {
   GoogleSignin.configure({
@@ -22,8 +24,20 @@ export default () => {
   const Auth = createStackNavigator();
   const Tab = createBottomTabNavigator();
   const authState = useTypedSelector((state) => state.auth);
-  const theme = useTypedSelector((state) => state.switchTheme.theme);
-  const { setInit, setUserInfo } = useActions();
+  const theme = useTypedSelector((state) => state.settings.theme);
+  const lang = useTypedSelector((state) => state.settings.language);
+  const { setInit, setUserInfo, changeLanguage } = useActions();
+  const locales = RNLocalize.getLocales();
+  const { i18n } = useTranslation();
+
+  useEffect(() => {
+    if (lang === '') {
+      changeLanguage(locales[0].languageCode);
+      i18n.changeLanguage(locales[0].languageCode);
+    } else {
+      i18n.changeLanguage(lang);
+    }
+  }, [lang]);
 
   const onAuthStateChanged = (user: IAuthUser | any) => {
     setUserInfo(user);
@@ -52,7 +66,7 @@ export default () => {
     <NavigationContainer>
       {authState.user || authState.token ? (
         <Tab.Navigator
-          initialRouteName="Wallet"
+          initialRouteName="Settings"
           tabBarOptions={{
             activeTintColor: theme ? '#006586' : '#d3d3d3',
             labelStyle: { fontFamily: 'serif' },
@@ -66,7 +80,7 @@ export default () => {
             name="Home"
             component={HomeScreen}
             options={{
-              tabBarLabel: I18n.t('home'),
+              tabBarLabel: i18n.t('home'),
               tabBarIcon: ({ focused }) => (
                 <Icon name="home" style={focused ? activeStyles : inActive} />
               ),
