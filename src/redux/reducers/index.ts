@@ -11,7 +11,7 @@ import dateAmountReducer from './dateAmountReducer';
 const rootPersistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['auth', 'home', 'settings'],
+  whitelist: ['auth', 'home', 'wallet', 'dateAmount', 'settings'],
 };
 
 const rootReducer = combineReducers({
