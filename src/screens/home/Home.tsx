@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useMemo } from 'react';
 import { View, FlatList, Image } from 'react-native';
 import { lightTheme, darkTheme } from '../../assets/styles/mainStack/home';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
@@ -10,8 +10,9 @@ import LinearGradient from 'react-native-linear-gradient';
 import { grad } from '../../assets/styles/blocks/gradient';
 import ScrollCalendar from '../../components/home/ScrollCalendar';
 import PurchaseModal from '../../components/modals/ PurchaseModal';
-import { Text } from 'native-base';
+import { Text, Toast } from 'native-base';
 import { useActions } from '../../hooks/useActions';
+import I18n from '../../localization/locale';
 
 const HomeScreen = ({}): ReactElement => {
   const { getCategoryAmountId } = useActions();
@@ -19,6 +20,23 @@ const HomeScreen = ({}): ReactElement => {
   const theme = useTypedSelector((state) => state.settings.theme);
   const styles = theme ? lightTheme : { ...lightTheme, ...darkTheme };
   const categories = useTypedSelector((state) => state.home.categories);
+
+  const over = useTypedSelector((state) => state.wallet.overLimit);
+
+  useMemo(() => {
+    setTimeout(() => {
+      if (over.length !== 0) {
+        over.map((item) => {
+          Toast.show({
+            text: `${I18n.t('limit')} (${item.name})`,
+            buttonText: 'ok',
+            type: 'warning',
+            duration: 5000,
+          });
+        });
+      }
+    }, 2000);
+  }, [over]);
 
   const historyCategory = (id: number) => {
     getCategoryAmountId(id);

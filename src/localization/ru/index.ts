@@ -71,6 +71,7 @@ export default {
   year: 'годовой план',
   maxSum: 'максимум 10 чисел',
   changeSum: 'изменить сумму',
+  limit: 'Вы превысили лимит в категории',
   //History
   allCat: 'Все категории',
   allTrans: 'все транзакции',

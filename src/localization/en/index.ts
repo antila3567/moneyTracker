@@ -72,6 +72,7 @@ export default {
   year: 'year budget',
   maxSum: 'max 10 numbers',
   changeSum: 'change the amount',
+  limit: 'You have exceeded the category limit',
   //History
   allCat: 'All categories',
   allTrans: 'all transactions',

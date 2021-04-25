@@ -71,6 +71,7 @@ export default {
   year: 'план на рік',
   maxSum: 'максимум 10 цифр',
   changeSum: 'змінити суму',
+  limit: 'Ви перевищили ліміт в категорії',
   //History
   allCat: 'Всі категорії',
   allTrans: 'сума всіх покупок',
