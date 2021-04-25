@@ -1,4 +1,4 @@
-import React, { ReactElement, useMemo } from 'react';
+import React, { ReactElement, useEffect, useMemo } from 'react';
 import { View, FlatList, Image } from 'react-native';
 import { lightTheme, darkTheme } from '../../assets/styles/mainStack/home';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
@@ -15,17 +15,16 @@ import { useActions } from '../../hooks/useActions';
 import I18n from '../../localization/locale';
 
 const HomeScreen = ({}): ReactElement => {
-  const { getCategoryAmountId } = useActions();
+  const { getCategoryAmountId, clearLimit } = useActions();
   const navigation = useNavigation();
   const theme = useTypedSelector((state) => state.settings.theme);
   const styles = theme ? lightTheme : { ...lightTheme, ...darkTheme };
   const categories = useTypedSelector((state) => state.home.categories);
-
   const over = useTypedSelector((state) => state.wallet.overLimit);
 
   useMemo(() => {
     setTimeout(() => {
-      if (over.length !== 0) {
+      if (!!over && over.length !== 0) {
         over.map((item) => {
           Toast.show({
             text: `${I18n.t('limit')} (${item.name})`,
@@ -34,6 +33,7 @@ const HomeScreen = ({}): ReactElement => {
             duration: 5000,
           });
         });
+        clearLimit();
       }
     }, 2000);
   }, [over]);

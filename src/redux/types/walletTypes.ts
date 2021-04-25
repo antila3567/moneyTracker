@@ -35,6 +35,7 @@ export enum WalletActionsTypes {
   GET_DATE = 'GET_DATE',
   UPDATE_AMOUNT = 'UPDATE_AMOUNT',
   CHANGE_SYMBOL = 'CHANGE_SYMBOL',
+  CLEAR_LIMIT = 'CLEAR_LIMIT',
 }
 
 interface ChangeGoalAction {
@@ -69,6 +70,9 @@ interface ChangeSymbol {
   type: WalletActionsTypes.CHANGE_SYMBOL;
   payload: string;
 }
+interface ClearLimit {
+  type: WalletActionsTypes.CLEAR_LIMIT;
+}
 
 export type WalletActions =
   | ChangeGoalAction
@@ -78,4 +82,5 @@ export type WalletActions =
   | ShowAlert
   | GetDate
   | UpdateAmount
-  | ChangeSymbol;
+  | ChangeSymbol
+  | ClearLimit;

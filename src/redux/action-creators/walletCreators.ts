@@ -59,3 +59,9 @@ export const changeSymbol = (sym: string) => {
     payload: sym,
   };
 };
+
+export const clearLimit = () => {
+  return {
+    type: WalletActionsTypes.CLEAR_LIMIT,
+  };
+};

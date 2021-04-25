@@ -77,6 +77,8 @@ const walletReducer = (state = init, action: WalletActions): IWalletState => {
       return { ...state, goals: updateAmountGoals };
     case WalletActionsTypes.CHANGE_SYMBOL:
       return { ...state, icon: action.payload };
+    case WalletActionsTypes.CLEAR_LIMIT:
+      return { ...state, overLimit: [] };
     default:
       const isAllActions: never = action;
   }
