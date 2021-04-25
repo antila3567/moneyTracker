@@ -1,5 +1,5 @@
-import React, { ReactElement, useMemo } from 'react';
-import { View, FlatList } from 'react-native';
+import React, { ReactElement } from 'react';
+import { View, FlatList, Image } from 'react-native';
 import { lightTheme, darkTheme } from '../../assets/styles/mainStack/home';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import CategoriesBlock from '../../components/home/CategoriesBlock';
@@ -10,34 +10,15 @@ import LinearGradient from 'react-native-linear-gradient';
 import { grad } from '../../assets/styles/blocks/gradient';
 import ScrollCalendar from '../../components/home/ScrollCalendar';
 import PurchaseModal from '../../components/modals/ PurchaseModal';
-import { Toast } from 'native-base';
+import { Text } from 'native-base';
 import { useActions } from '../../hooks/useActions';
-import I18n from 'i18next'
 
 const HomeScreen = ({}): ReactElement => {
   const { getCategoryAmountId } = useActions();
   const navigation = useNavigation();
-  const switchColor: boolean = useTypedSelector(
-    (state) => state.settings.theme
-  );
-  const styles = switchColor ? lightTheme : { ...lightTheme, ...darkTheme };
+  const theme = useTypedSelector((state) => state.settings.theme);
+  const styles = theme ? lightTheme : { ...lightTheme, ...darkTheme };
   const categories = useTypedSelector((state) => state.home.categories);
-  const over = useTypedSelector((state) => state.wallet.overLimit);
-
-  useMemo(() => {
-    setTimeout(() => {
-      if (over.length !== 0) {
-        over.map((item) => {
-          Toast.show({
-            text: `Вы превысили лимит в категории (${item.name})`,
-            buttonText: 'ok',
-            type: 'warning',
-            duration: 5000,
-          });
-        });
-      }
-    }, 2000);
-  }, [over]);
 
   const historyCategory = (id: number) => {
     getCategoryAmountId(id);
@@ -57,29 +38,39 @@ const HomeScreen = ({}): ReactElement => {
   };
 
   return (
-    <>
-      {categories !== null && (
-        <LinearGradient colors={grad.lightBackground} style={styles.wrapper}>
-          <PurchaseModal />
+    <LinearGradient
+      colors={theme ? grad.lightBackground : grad.darkBg}
+      style={styles.wrapper}
+    >
+      <PurchaseModal />
+      <View>
+        <View style={[styles.header]}>
+          <ScrollCalendar />
+        </View>
+        {categories.length !== 0 ? (
           <View>
-            <View style={[styles.header]}>
-              <ScrollCalendar />
+            <View style={styles.scrollWrap}>
+              <FlatList
+                data={categories}
+                renderItem={renderBlock}
+                keyExtractor={(item) => String(item.id)}
+                numColumns={2}
+              />
             </View>
-            <View>
-              <View style={styles.scrollWrap}>
-                <FlatList
-                  data={categories}
-                  renderItem={renderBlock}
-                  keyExtractor={(item) => String(item.id)}
-                  numColumns={2}
-                />
-              </View>
-            </View>
-            <ChartPie categories={categories} styles={styles} />
           </View>
-        </LinearGradient>
-      )}
-    </>
+        ) : (
+          <View style={styles.scrollWrap}>
+            <View style={styles.firstCat}>
+              <Text style={styles.firstText}>Добавьте первую категорию</Text>
+              <Image
+                source={require('../../assets/image/home/arrowDown.png')}
+              />
+            </View>
+          </View>
+        )}
+        <ChartPie categories={categories} styles={styles} />
+      </View>
+    </LinearGradient>
   );
 };
 

@@ -48,6 +48,7 @@ export enum HomeActionTypes {
   INCREMENT_AMOUNT = 'INCREMENT_AMOUNT',
   DECREMENT_AMOUNT = 'DECREMENT_AMOUNT',
   GET_AMOUNT_ID = 'GET_AMOUNT_ID',
+  CHANGE_CURRENCY = 'CHANGE_CURRENCY',
 }
 
 interface DecrementAmount {
@@ -121,6 +122,10 @@ interface GetId {
   type: HomeActionTypes.GET_AMOUNT_ID;
   payload: number;
 }
+interface ChangeCurrency {
+  type: HomeActionTypes.CHANGE_CURRENCY;
+  payload: string;
+}
 
 export type IHomeActions =
   | PushData
@@ -137,4 +142,5 @@ export type IHomeActions =
   | IncrementAmount
   | DecrementAmount
   | CreateNewCategory
-  | GetId;
+  | GetId
+  | ChangeCurrency;

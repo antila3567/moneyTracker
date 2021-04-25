@@ -84,6 +84,8 @@ const homeReducer = (state = init, action: IHomeActions): IHomeState => {
       const updateCat = sortCategories.sort((a, b) => (a.id < b.id ? -1 : 1));
 
       return { ...state, categories: updateCat };
+    case HomeActionTypes.CHANGE_CURRENCY:
+      return { ...state, currency: action.payload };
     default:
       const isAllActions: never = action;
   }

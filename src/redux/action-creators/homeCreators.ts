@@ -105,3 +105,10 @@ export const getCategoryAmountId = (id: number | null) => {
     payload: id,
   };
 };
+
+export const changeCurrency = (currency: string) => {
+  return {
+    type: HomeActionTypes.CHANGE_CURRENCY,
+    payload: currency,
+  };
+};

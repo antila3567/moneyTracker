@@ -75,7 +75,7 @@ export const lightTheme = StyleSheet.create({
   },
   loginBtnText: {
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: 18,
     color: '#000',
     fontFamily: 'serif',
   },
@@ -156,7 +156,7 @@ export const darkTheme = StyleSheet.create({
   loginBtnText: {
     textAlign: 'center',
     fontWeight: 'bold',
-    fontSize: 22,
+    fontSize: 18,
     color: '#d3d3d3',
     fontFamily: 'serif',
   },

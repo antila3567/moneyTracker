@@ -8,6 +8,7 @@ const init: ISettingState = {
   secure: true,
   language: '',
   theme: true,
+  isInit: true,
 };
 
 const settingReducer = (
@@ -21,6 +22,8 @@ const settingReducer = (
       return { ...state, language: action.payload };
     case SwitchActionTypes.SWITCH_THEME:
       return { ...state, theme: action.payload };
+    case SwitchActionTypes.IS_INIT:
+      return { ...state, isInit: action.payload };
     default:
       const isAllActions: never = action;
   }

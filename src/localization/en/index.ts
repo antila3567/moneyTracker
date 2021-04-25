@@ -47,6 +47,7 @@ export default {
   amount: 'enter the amount',
   description: 'description (optional)',
   //month
+  all: 'All',
   1: 'Jan',
   2: 'Feb',
   3: 'Mar',
@@ -77,4 +78,14 @@ export default {
   wholeAmount: 'the sum of all purchases',
   clear1: 'There have been no operations yet',
   clear2: 'create a category',
+  //SETTINGS
+  theme: 'Dark mode',
+  secure: 'Secure',
+  lang: 'Languages',
+  cur: 'Currency',
+  export: 'Export to excel',
+  export1: 'export',
+  logOut: 'Log out',
+  logOut1: 'exit',
+  progress: 'Sorry, this feature is still under development.',
 };

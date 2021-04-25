@@ -26,6 +26,7 @@ export default () => {
   const authState = useTypedSelector((state) => state.auth);
   const theme = useTypedSelector((state) => state.settings.theme);
   const lang = useTypedSelector((state) => state.settings.language);
+  const isInit = useTypedSelector((state) => state.settings.isInit);
   const { setInit, setUserInfo, changeLanguage } = useActions();
   const locales = RNLocalize.getLocales();
   const { i18n } = useTranslation();
@@ -66,7 +67,7 @@ export default () => {
     <NavigationContainer>
       {authState.user || authState.token ? (
         <Tab.Navigator
-          initialRouteName="Settings"
+          initialRouteName="Home"
           tabBarOptions={{
             activeTintColor: theme ? '#006586' : '#d3d3d3',
             labelStyle: { fontFamily: 'serif' },
@@ -135,11 +136,13 @@ export default () => {
         </Tab.Navigator>
       ) : (
         <Auth.Navigator>
-          <Auth.Screen
-            name="Onboarding"
-            component={OnboardingScreen}
-            options={{ headerShown: false }}
-          />
+          {isInit && (
+            <Auth.Screen
+              name="Onboarding"
+              component={OnboardingScreen}
+              options={{ headerShown: false }}
+            />
+          )}
           <Auth.Screen
             name="SignIn"
             component={SignIn}

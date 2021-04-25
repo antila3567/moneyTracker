@@ -11,33 +11,39 @@ import LinearGradient from 'react-native-linear-gradient';
 import { grad } from '../../assets/styles/blocks/gradient';
 import { lightTheme, darkTheme } from '../../assets/styles/onboarding';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
-import I18n from 'i18next'
+import I18n from 'i18next';
 import * as RNLocalize from 'react-native-localize';
 import { useTranslation } from 'react-i18next';
+import { useActions } from '../../hooks/useActions';
 
 const OnboardingScreen = ({}): ReactElement => {
   const navigation = useNavigation();
-  const switchColor = useTypedSelector((state) => state.settings.theme);
-  const styles = switchColor ? lightTheme : { ...lightTheme, ...darkTheme };
+  const { isFirstInit } = useActions();
+  const theme = useTypedSelector((state) => state.settings.theme);
+  const styles = theme ? lightTheme : { ...lightTheme, ...darkTheme };
   const locales = RNLocalize.getLocales();
   const { i18n } = useTranslation();
-
+  
   useEffect(() => {
     i18n.changeLanguage(locales[0].languageCode);
   }, []);
 
   const goToAuth = (): void => {
     navigation.navigate('SignIn');
+    isFirstInit(false);
   };
 
   return (
-    <LinearGradient colors={grad.lightBackground} style={styles.wrapper}>
+    <LinearGradient
+      colors={theme ? grad.lightBackground : grad.darkBg}
+      style={styles.wrapper}
+    >
       <SafeAreaView style={{ flex: 1 }}>
         <View style={styles.headerBlock}>
           <Image
             style={styles.logoImg}
             source={
-              switchColor
+              theme
                 ? require('../../assets/image/logotypes/logoText.png')
                 : require('../../assets/image/logotypes/logoWhiteText.png')
             }

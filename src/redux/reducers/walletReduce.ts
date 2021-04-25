@@ -14,7 +14,7 @@ const init: IWalletState = {
   overLimit: [],
   date: null,
   balance: 0,
-  icon: '$',
+  icon: '₴',
   id: null,
 };
 
@@ -75,6 +75,8 @@ const walletReducer = (state = init, action: WalletActions): IWalletState => {
         a.id < b.id ? -1 : 1
       );
       return { ...state, goals: updateAmountGoals };
+    case WalletActionsTypes.CHANGE_SYMBOL:
+      return { ...state, icon: action.payload };
     default:
       const isAllActions: never = action;
   }

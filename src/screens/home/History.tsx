@@ -1,13 +1,5 @@
 import React, { ReactElement, useMemo, useState } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Alert,
-  Dimensions,
-  FlatList,
-} from 'react-native';
+import { Text, View, TouchableOpacity, Alert, FlatList } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { grad } from '../../assets/styles/blocks/gradient';
@@ -20,6 +12,7 @@ import { Categories } from '../../redux/types/homeTypes';
 import { chartFormatter } from '../../utils/formatters/chartFormatter';
 import translator from '../../utils/formatters/translator';
 import I18n from '../../localization/locale';
+import { lightTheme, darkTheme } from '../../assets/styles/mainStack/history';
 
 const History = (): ReactElement => {
   translator();
@@ -31,9 +24,10 @@ const History = (): ReactElement => {
   const id = useTypedSelector((state) => state.home.id);
   const newData = !!data ? [...data.expenses].reverse() : null;
   const formatChart = chartFormatter();
-  const allCount =
-    formatChart.reduce((a, b) => a + (b.expenseCount || 0), 0) - state.length;
+  const allCount = formatChart.reduce((a, b) => a + (b.expenseCount || 0), 0);
   const allTotal = formatChart.reduce((a, b) => a + (b.y || 0), 0);
+  const theme = useTypedSelector((state) => state.settings.theme);
+  const styles = theme ? lightTheme : { ...lightTheme, ...darkTheme };
 
   useMemo(() => {
     state.map((item) => {
@@ -41,14 +35,10 @@ const History = (): ReactElement => {
       if (item.id === id) {
         setData(item);
         setTotal(total);
-        setCount(item.expenses.length - 1);
+        setCount(item.expenses.length);
       }
     });
   }, [state, id]);
-
-  // useMemo(() => {
-
-  // })
 
   const closeCategories = () => {
     setData(null);
@@ -65,7 +55,10 @@ const History = (): ReactElement => {
   };
 
   return (
-    <LinearGradient colors={grad.lightBackground} style={styles.wrapper}>
+    <LinearGradient
+      colors={theme ? grad.lightBackground : grad.darkBg}
+      style={styles.wrapper}
+    >
       {!!data ? (
         <SafeAreaView>
           <View style={[styles.headerBlock]}>
@@ -81,7 +74,7 @@ const History = (): ReactElement => {
             </View>
             <View style={styles.category}>
               <Text style={styles.defText}>{I18n.t('allTrans')}</Text>
-              <Text style={styles.countText}>{count}</Text>
+              <Text style={styles.countText}>{count - 1}</Text>
             </View>
           </View>
           <View style={styles.scrollWrap}>
@@ -163,105 +156,5 @@ const History = (): ReactElement => {
     </LinearGradient>
   );
 };
-
-const styles = StyleSheet.create({
-  wrapper: {
-    flexGrow: 1,
-  },
-  headerBlock: {
-    backgroundColor: '#F0FFFF',
-    elevation: 10,
-    paddingBottom: 20,
-    paddingHorizontal: 20,
-  },
-  name: {
-    fontSize: 25,
-    fontFamily: 'serif',
-    fontWeight: 'bold',
-    color: '#000',
-  },
-  category: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginTop: 5,
-  },
-  defText: {
-    fontSize: 16,
-    fontFamily: 'serif',
-    opacity: 0.6,
-  },
-  countText: {
-    fontSize: 20,
-    fontFamily: 'serif',
-    fontWeight: 'bold',
-  },
-  shadow: {
-    shadowColor: '#000000',
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
-  },
-  transaction: {
-    marginHorizontal: 10,
-    marginTop: 10,
-    borderRadius: 12,
-  },
-  card: {
-    backgroundColor: '#F0FFFF',
-  },
-  cardContent: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 10,
-    width: '100%',
-  },
-  scrollWrap: {
-    marginBottom: Dimensions.get('screen').height / 1.85,
-  },
-  scroll: {
-    paddingBottom: 20,
-  },
-  transText: {
-    maxWidth: '80%',
-    fontSize: 14,
-    fontFamily: 'serif',
-    marginBottom: 10,
-    opacity: 0.8,
-  },
-  transDate: {
-    fontSize: 12,
-    fontFamily: 'serif',
-    opacity: 0.6,
-  },
-  transMoney: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    fontFamily: 'serif',
-  },
-  scrollWrapMain: {
-    flexGrow: 1,
-    marginBottom: Dimensions.get('screen').height / 20,
-  },
-  clear: {
-    marginTop: Dimensions.get('screen').height / 3,
-    alignItems: 'center',
-  },
-  clearText: {
-    fontSize: 25,
-    fontFamily: 'serif',
-  },
-  transBlock: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  scrollCategory: {
-    marginBottom: Dimensions.get('screen').height / 3.4,
-  },
-});
 
 export default History;

@@ -1,24 +1,48 @@
 import React, { ReactElement, useEffect, useState } from 'react';
 import {
   SafeAreaView,
-  StyleSheet,
   Text,
   View,
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
 import Androw from 'react-native-androw';
+import { lightTheme, darkTheme } from '../../assets/styles/mainStack/calendar';
+import { useActions } from '../../hooks/useActions';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
 import I18n from '../../localization/locale';
 import { monthA } from '../../utils/formatters/dataFormatter';
 import translator from '../../utils/formatters/translator';
 
 const ScrollCalendar = (): ReactElement => {
-  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth() + 1);
   translator();
-  
+  const { filterDateAmount } = useActions();
+  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth() + 1);
+  const allCat = useTypedSelector((state) => state.home.categories);
+  const theme = useTypedSelector((state) => state.settings.theme);
+  const styles = theme ? lightTheme : { ...lightTheme, ...darkTheme };
+
+  useEffect(() => {
+    const cutDate = allCat.map((item) => {
+      const findItem = !!item.expenses.find(
+        (item) => new Date(item.date).getMonth() + 1 === currentMonth
+      );
+
+      if (findItem) {
+        return item;
+      }
+    });
+    const cutNull: any = cutDate.filter((item) => !!item);
+    filterDateAmount(cutNull);
+
+    if (currentMonth === 0) {
+      filterDateAmount(allCat);
+    }
+  }, [currentMonth, allCat]);
+
   return (
     <SafeAreaView>
-      <View style={[styles.container]}>
+      <View>
         <Androw style={styles.shadow}>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             <View style={[styles.listOfDays]}>
@@ -30,7 +54,7 @@ const ScrollCalendar = (): ReactElement => {
                       : [
                           styles.days,
                           styles.shadow,
-                          { backgroundColor: '#006586' },
+                          { backgroundColor: theme ? '#006586' : '#000' },
                         ]
                   }
                   onPress={() => setCurrentMonth(item.number)}
@@ -43,6 +67,7 @@ const ScrollCalendar = (): ReactElement => {
                           color: currentMonth == item.number ? '#fff' : '#000',
                         }}
                       >
+                        {item.title === 'all' && I18n.t('all')}
                         {item.title === '1' && I18n.t('1')}
                         {item.title === '2' && I18n.t('2')}
                         {item.title === '3' && I18n.t('3')}
@@ -65,7 +90,7 @@ const ScrollCalendar = (): ReactElement => {
                           color: currentMonth == item.number ? '#fff' : '#000',
                         }}
                       >
-                        {item.number}
+                        {item.sym}
                       </Text>
                     </View>
                   </View>
@@ -80,41 +105,3 @@ const ScrollCalendar = (): ReactElement => {
 };
 
 export default ScrollCalendar;
-
-const styles = StyleSheet.create({
-  container: {},
-  listOfDays: {
-    flexDirection: 'row',
-  },
-  days: {
-    padding: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
-    margin: 5,
-    borderRadius: 8,
-    backgroundColor: '#F0FFFF',
-    width: 50,
-  },
-  shadow: {
-    shadowColor: '#000000',
-    shadowOffset: {
-      width: 1,
-      height: 0,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 10,
-  },
-  headerTitle: {
-    fontSize: 25,
-    fontWeight: 'bold',
-  },
-  textBlock: {
-    paddingVertical: 5,
-  },
-});

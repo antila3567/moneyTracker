@@ -157,4 +157,15 @@ export const darkTheme = StyleSheet.create({
     backgroundColor: '#d3d3d3',
     borderColor: '#000',
   },
+  btnAdd: {
+    marginTop: 10,
+    borderRadius: 10,
+    width: 150,
+    padding: 10,
+    elevation: 10,
+    borderWidth: 1,
+    borderColor: '#d3d3d3',
+    backgroundColor: '#000',
+    shadowColor: '#000',
+  },
 });

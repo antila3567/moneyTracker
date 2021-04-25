@@ -20,3 +20,10 @@ export const changeLanguage = (lang: string) => {
     payload: lang,
   };
 };
+
+export const isFirstInit = (bool: boolean) => {
+  return {
+    type: SwitchActionTypes.IS_INIT,
+    payload: bool,
+  };
+};

@@ -2,11 +2,13 @@ export interface ISettingState {
   secure: boolean;
   language: string;
   theme: boolean;
+  isInit: boolean;
 }
 export enum SwitchActionTypes {
   SWITCH_SECURE = 'SWITCH_SECURE',
   SWITCH_LANGUAGE = 'SWITCH_LANGUAGE',
   SWITCH_THEME = 'SWITCH_THEME',
+  IS_INIT = 'IS_INIT',
 }
 
 interface ISwitchSecure {
@@ -22,5 +24,13 @@ interface ISwitchThemes {
   type: SwitchActionTypes.SWITCH_THEME;
   payload: boolean;
 }
+interface IIsInit {
+  type: SwitchActionTypes.IS_INIT;
+  payload: boolean;
+}
 
-export type ISettingActions = ISwitchSecure | ISwitchLanguage | ISwitchThemes;
+export type ISettingActions =
+  | IIsInit
+  | ISwitchSecure
+  | ISwitchLanguage
+  | ISwitchThemes;

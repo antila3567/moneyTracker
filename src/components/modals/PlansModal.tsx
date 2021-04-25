@@ -3,7 +3,7 @@ import { Input, Item, Toast } from 'native-base';
 import { View, Text, TouchableOpacity, Animated } from 'react-native';
 import Modal from 'react-native-modal';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
-import I18n from 'i18next'
+import I18n from 'i18next';
 import {
   lightTheme,
   darkTheme,
@@ -39,10 +39,10 @@ const PlansModal = ({
   });
 
   const addNewGoal = () => {
-    if (name === 'increase') {
+    if (name === 'increase' && sum.length < 11) {
       changeBalance(balance + Number(sum));
     }
-    if (name === 'decrease') {
+    if (name === 'decrease' && sum.length < 11) {
       changeBalance(balance - Number(sum));
     }
     if (name === 'balance' && !!id && sum.length < 11) {

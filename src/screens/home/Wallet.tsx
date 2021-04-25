@@ -1,11 +1,11 @@
-import React, { ReactElement, useEffect, useMemo, useState } from 'react';
+import React, { ReactElement, useMemo, useState } from 'react';
 import {
   View,
   Text,
   TouchableOpacity,
-  StyleSheet,
   SafeAreaView,
   ScrollView,
+  Dimensions,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { grad } from '../../assets/styles/blocks/gradient';
@@ -18,8 +18,10 @@ import { useActions } from '../../hooks/useActions';
 import moment from 'moment-timezone';
 import I18n from '../../localization/locale';
 import translator from '../../utils/formatters/translator';
+import { lightTheme, darkTheme } from '../../assets/styles/mainStack/wallet';
 
 const Wallet = ({}): ReactElement => {
+  translator();
   const { showAlert, getDateWallet, newDayAmount } = useActions();
   const [modal, setModal] = useState(false);
   const [whatIsModal, setWhatIsModal] = useState<string | null>(null);
@@ -28,7 +30,8 @@ const Wallet = ({}): ReactElement => {
   const balance = useTypedSelector((state) => state.wallet.balance);
   const dateWallet = useTypedSelector((state) => state.wallet.date);
   const currency = useTypedSelector((state) => state.wallet.icon);
-  translator();
+  const theme = useTypedSelector((state) => state.settings.theme);
+  const styles = theme ? lightTheme : { ...lightTheme, ...darkTheme };
 
   useMemo(() => {
     const date = new Date();
@@ -85,7 +88,10 @@ const Wallet = ({}): ReactElement => {
   };
 
   return (
-    <LinearGradient colors={grad.lightBackground} style={styles.wrapper}>
+    <LinearGradient
+      colors={theme ? grad.lightBackground : grad.darkBg}
+      style={styles.wrapper}
+    >
       <PlansModal
         modal={modal}
         setModal={setModal}
@@ -119,120 +125,46 @@ const Wallet = ({}): ReactElement => {
             </Androw>
           </View>
         </View>
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={styles.scroll}
-        >
-          <Androw style={[styles.shadow]}>
-            {goals.map((item) => (
-              <View style={styles.planBlock} key={item.id}>
-                <ProgressBar
-                  percentage={item.percent}
-                  overlimit={item.amount > item.total ? true : false}
-                />
-                <View>
-                  <Text style={styles.planText}>
-                    {item.name === 'daily' && I18n.t('daily')}
-                    {item.name === 'weakly' && I18n.t('weakly')}
-                    {item.name === 'month' && I18n.t('month')}
-                    {item.name === 'year' && I18n.t('year')}
-                  </Text>
-                  {!!item.total ? (
+        <View style={{ height: Dimensions.get('screen').height / 1.8 }}>
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.scroll}
+          >
+            <Androw style={[styles.shadow]}>
+              {goals.map((item) => (
+                <View style={styles.planBlock} key={item.id}>
+                  <ProgressBar
+                    percentage={item.percent}
+                    overlimit={item.amount > item.total ? true : false}
+                  />
+                  <View>
                     <Text style={styles.planText}>
-                      {item.amount} - {item.total}
+                      {item.name === 'daily' && I18n.t('daily')}
+                      {item.name === 'weakly' && I18n.t('weakly')}
+                      {item.name === 'month' && I18n.t('month')}
+                      {item.name === 'year' && I18n.t('year')}
                     </Text>
-                  ) : (
-                    <Text style={styles.planText}>{I18n.t('goal')}</Text>
-                  )}
+                    {!!item.total ? (
+                      <Text style={styles.planText}>
+                        {item.amount} - {item.total}
+                      </Text>
+                    ) : (
+                      <Text style={styles.planText}>{I18n.t('goal')}</Text>
+                    )}
+                  </View>
+                  <TouchableOpacity
+                    onPress={() => changeBalance('balance', item.id)}
+                  >
+                    <Icon style={[styles.icons]} name={'add'} />
+                  </TouchableOpacity>
                 </View>
-                <TouchableOpacity
-                  onPress={() => changeBalance('balance', item.id)}
-                >
-                  <Icon style={[styles.icons]} name={'add'} />
-                </TouchableOpacity>
-              </View>
-            ))}
-          </Androw>
-        </ScrollView>
+              ))}
+            </Androw>
+          </ScrollView>
+        </View>
       </SafeAreaView>
     </LinearGradient>
   );
 };
-
-const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-  },
-  textMoney: {
-    fontSize: 40,
-    fontWeight: 'bold',
-    fontFamily: 'serif',
-    textAlign: 'center',
-  },
-  descriptionText: {
-    textAlign: 'center',
-    fontFamily: 'serif',
-    opacity: 0.7,
-  },
-  headerBlock: {
-    backgroundColor: '#F0FFFF',
-    elevation: 10,
-    paddingBottom: 20,
-  },
-  moneyButtons: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginTop: 20,
-  },
-  btn: {
-    backgroundColor: '#006586',
-    width: 150,
-    padding: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 8,
-  },
-  shadow: {
-    shadowColor: '#000000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
-  },
-  btnText: {
-    fontFamily: 'serif',
-    fontSize: 20,
-    color: '#ffffff',
-  },
-  scroll: {
-    paddingBottom: 50,
-    paddingHorizontal: 20,
-  },
-  planBlock: {
-    backgroundColor: '#F0FFFF',
-    padding: 10,
-    marginTop: 20,
-    borderRadius: 8,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  icons: {
-    padding: 10,
-    fontSize: 35,
-    color: '#000000',
-  },
-  planText: {
-    fontSize: 17,
-    fontFamily: 'serif',
-    opacity: 0.8,
-    textAlign: 'center',
-  },
-  delete: {
-    transform: [{ rotate: '45deg' }],
-  },
-});
 
 export default Wallet;

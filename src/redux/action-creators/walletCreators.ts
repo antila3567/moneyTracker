@@ -52,3 +52,10 @@ export const newDayAmount = (id: number) => {
     payload: id,
   };
 };
+
+export const changeSymbol = (sym: string) => {
+  return {
+    type: WalletActionsTypes.CHANGE_SYMBOL,
+    payload: sym,
+  };
+};

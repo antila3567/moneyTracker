@@ -85,8 +85,18 @@ export const lightTheme = StyleSheet.create({
   scrollWrap: {
     height: 130,
   },
+  firstCat: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: Dimensions.get('screen').height / 9,
+  },
   showBlock: {
     flexDirection: 'row',
+  },
+  firstText: {
+    fontFamily: 'serif',
+    fontSize: 22,
+    color: '#000',
   },
   arrowBlock: {
     justifyContent: 'center',
@@ -108,7 +118,7 @@ export const lightTheme = StyleSheet.create({
   },
   pieCircle: {
     position: 'absolute',
-    top: Dimensions.get('screen').height / 5.7,
+    top: '32%',
     width: Dimensions.get('screen').width,
     paddingLeft: 5,
   },
@@ -164,9 +174,7 @@ export const darkTheme = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#141414',
     height: 70,
-    elevation: 10,
   },
   headerTitle: {
     fontSize: 25,
@@ -201,5 +209,28 @@ export const darkTheme = StyleSheet.create({
     fontFamily: 'serif',
     fontSize: 12,
     color: '#fff',
+  },
+  firstText: {
+    fontFamily: 'serif',
+    fontSize: 22,
+    color: '#d3d3d3',
+  },
+  shadow: {
+    shadowColor: '#fff',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 0.2,
+  },
+  blockItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: '#d3d3d3',
+    width: 'auto',
+    alignItems: 'center',
+    padding: 12,
+    borderRadius: 10,
   },
 });

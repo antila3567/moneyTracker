@@ -2,18 +2,18 @@ import React, { ReactElement, ReactNode, useEffect, useRef } from 'react';
 import {
   Modal,
   StyleProp,
-  StyleSheet,
   ViewStyle,
   Animated,
   TouchableOpacity,
-  Dimensions,
   Text,
   View,
 } from 'react-native';
+import { lightTheme, darkTheme } from '../../assets/styles/mainStack/myModal';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
 
 interface IMyModalProps {
   modalVisible: boolean;
-  onClose: (bool: boolean, val?: string) => void;
+  onClose: any;
   children?: ReactNode;
   style?: StyleProp<ViewStyle>;
   data?: any[];
@@ -22,6 +22,8 @@ interface IMyModalProps {
 const MyModal = React.memo(
   ({ modalVisible, onClose, children, data }: IMyModalProps): ReactElement => {
     const scaleValue = useRef(new Animated.Value(0)).current;
+    const theme = useTypedSelector((state) => state.settings.theme);
+    const styles = theme ? lightTheme : { ...lightTheme, ...darkTheme };
 
     const animation = () => {
       if (modalVisible) {
@@ -57,10 +59,11 @@ const MyModal = React.memo(
                 data.map((item, index) => (
                   <View key={index}>
                     <TouchableOpacity
-                      onPress={() => onClose(true, item.value)}
+                      onPress={() => onClose(true, item.value, item.symbol)}
                       style={styles.card}
                     >
                       <Text>{item.label}</Text>
+                      <Text>{item.symbol}</Text>
                       <Text>{item.flag}</Text>
                     </TouchableOpacity>
                   </View>
@@ -73,32 +76,5 @@ const MyModal = React.memo(
     );
   }
 );
-
-const styles = StyleSheet.create({
-  modalBackground: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  modalContainer: {
-    width: Dimensions.get('screen').width / 1.2,
-    borderRadius: 16,
-    paddingHorizontal: 40,
-    paddingVertical: 30,
-  },
-  closeBtn: {
-    textAlign: 'right',
-    fontSize: 40,
-  },
-  card: {
-    backgroundColor: '#F0FFFF',
-    marginVertical: 10,
-    padding: 20,
-    elevation: 10,
-    borderRadius: 12,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-});
 
 export default MyModal;

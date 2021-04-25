@@ -10,7 +10,7 @@ import {
 import { lightTheme, darkTheme } from '../../assets/styles/auth';
 import { useActions } from '../../hooks/useActions';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
-import I18n from 'i18next'
+import I18n from 'i18next';
 import auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { LoginManager, AccessToken } from 'react-native-fbsdk';
@@ -20,8 +20,8 @@ import LinearGradient from 'react-native-linear-gradient';
 
 const SignIn = ({}): ReactElement => {
   const navigation = useNavigation();
-  const switchColor = useTypedSelector((state) => state.settings.theme);
-  const styles = switchColor ? lightTheme : { ...lightTheme, ...darkTheme };
+  const theme = useTypedSelector((state) => state.settings.theme);
+  const styles = theme ? lightTheme : { ...lightTheme, ...darkTheme };
   const login = useTypedSelector((state) => state.auth);
   const {
     setUserEmail,
@@ -81,7 +81,10 @@ const SignIn = ({}): ReactElement => {
   };
 
   return (
-    <LinearGradient colors={grad.lightBackground} style={styles.wrapper}>
+    <LinearGradient
+      colors={theme ? grad.lightBackground : grad.darkBg}
+      style={styles.wrapper}
+    >
       <SafeAreaView>
         <View>
           <Image

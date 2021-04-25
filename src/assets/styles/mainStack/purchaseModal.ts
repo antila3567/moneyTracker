@@ -20,6 +20,7 @@ export const lightTheme = StyleSheet.create({
     fontSize: 25,
     fontWeight: 'bold',
     textAlign: 'center',
+    color: '#000',
   },
   categoryTabs: {
     flexDirection: 'row',
@@ -46,6 +47,7 @@ export const lightTheme = StyleSheet.create({
   inputName: {
     marginTop: 20,
     fontFamily: 'serif',
+    color: '#000',
   },
   confirmBtnBLock: {
     marginTop: 10,
@@ -60,8 +62,6 @@ export const lightTheme = StyleSheet.create({
     padding: 10,
     backgroundColor: '#006586',
     elevation: 10,
-    borderColor: '#ADD8E6',
-    borderWidth: 1,
   },
   closeBtn: {
     width: 130,
@@ -90,5 +90,28 @@ export const darkTheme = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
+  },
+  categoryName: {
+    fontFamily: 'serif',
+    fontSize: 25,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#d3d3d3',
+  },
+  inputName: {
+    marginTop: 20,
+    fontFamily: 'serif',
+    color: '#d3d3d3',
+  },
+  confirmBtn: {
+    marginTop: 10,
+    borderRadius: 10,
+    width: 150,
+    padding: 10,
+    elevation: 10,
+    borderWidth: 1,
+    borderColor: '#d3d3d3',
+    backgroundColor: '#000',
+    shadowColor: '#000',
   },
 });

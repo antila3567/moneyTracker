@@ -1,9 +1,8 @@
 export const selectCurrency = [
-    { label: 'UAH', value: 'UAH' },
-    { label: 'USD', value: 'USD' },
-    { label: 'EUR', value: 'EUR' },
-    { label: 'BYN', value: 'BYN' },
-    { label: 'PLN', value: 'PLN' },
-    { label: 'LTL', value: 'LTL' },
-    { label: 'KZT', value: 'KZT' },
-  ];
+  { label: 'UAH', value: 'UAH', symbol: '₴', flag: '🇺🇦' },
+  { label: 'USD', value: 'USD', symbol: '$', flag: '🇺🇸' },
+  { label: 'EUR', value: 'EUR', symbol: '€', flag: '💶' },
+  { label: 'BYN', value: 'BYN', symbol: 'Ў', flag: '🇧🇾' },
+  { label: 'PLN', value: 'PLN', symbol: 'Zł', flag: '🇵🇱' },
+  { label: 'RUB', value: 'RUB', symbol: '₽', flag: '🇷🇺' },
+];

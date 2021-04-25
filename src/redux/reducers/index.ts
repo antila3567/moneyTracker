@@ -6,6 +6,7 @@ import homeReducer from './homeReducer';
 import userReducer from './userReduce';
 import walletReducer from './walletReduce';
 import settingReducer from './settingsReducer';
+import dateAmountReducer from './dateAmountReducer';
 
 const rootPersistConfig = {
   key: 'root',
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   home: homeReducer,
   wallet: walletReducer,
   settings: settingReducer,
+  dateAmount: dateAmountReducer,
 });
 
 export default persistReducer(rootPersistConfig, rootReducer);
