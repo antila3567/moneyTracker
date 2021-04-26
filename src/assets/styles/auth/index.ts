@@ -106,6 +106,12 @@ export const lightTheme = StyleSheet.create({
     marginTop: 5,
     color: 'red',
   },
+  closeAcc: {
+    fontSize: 40,
+    textAlign: 'right',
+    paddingHorizontal:20,
+    color:'#000'
+  },
 });
 
 export const darkTheme = StyleSheet.create({
@@ -165,5 +171,11 @@ export const darkTheme = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 18,
     fontFamily: 'serif',
+  },
+  closeAcc: {
+    fontSize: 40,
+    textAlign: 'right',
+    paddingHorizontal:20,
+    color:'#d3d3d3'
   },
 });

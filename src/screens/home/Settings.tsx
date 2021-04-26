@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Text, TouchableOpacity } from 'react-native';
-import auth from '@react-native-firebase/auth';
+import { Text, TouchableOpacity, View, Image } from 'react-native';
 import { useActions } from '../../hooks/useActions';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import LinearGradient from 'react-native-linear-gradient';
@@ -25,14 +24,14 @@ import { lightTheme, darkTheme } from '../../assets/styles/mainStack/settings';
 
 const Settings = () => {
   const {
+    isAccount,
     goLogOut,
+    isFirstInit,
     switchCurrentTheme,
-    switchSecure,
     changeLanguage,
     changeCurrency,
     changeSymbol,
   } = useActions();
-  const secure = useTypedSelector((state) => state.settings.secure);
   const lang = useTypedSelector((state) => state.settings.language);
   const currenc = useTypedSelector((state) => state.home.currency);
   const sym = useTypedSelector((state) => state.wallet.icon);
@@ -42,6 +41,7 @@ const Settings = () => {
   const { i18n } = useTranslation();
   const theme = useTypedSelector((state) => state.settings.theme);
   const styles = theme ? lightTheme : { ...lightTheme, ...darkTheme };
+  const authInfo: any = useTypedSelector((state) => state.auth.user);
 
   const changeLanguageUser = (bool: boolean, val: string) => {
     if (bool) {
@@ -59,8 +59,12 @@ const Settings = () => {
     setCurrency(false);
   };
 
+  const addAcc = () => {
+    isAccount(true);
+    isFirstInit(true);
+  };
+
   const logOut = () => {
-    auth().signOut();
     goLogOut();
   };
 
@@ -89,6 +93,28 @@ const Settings = () => {
           onClose={changeCurrencyUser}
           data={selectCurrency}
         />
+        {authInfo !== null && (
+          <View style={styles.infoBlock}>
+            <View>
+              <Text style={styles.defText}>
+                {!!authInfo._user.email && authInfo._user.email}
+              </Text>
+              {!!authInfo._user.displayName && (
+                <Text style={styles.defText}>{authInfo._user.displayName}</Text>
+              )}
+            </View>
+            <Image
+              style={styles.img}
+              source={
+                !!authInfo._user.photoURL
+                  ? {
+                      uri: authInfo._user.photoURL,
+                    }
+                  : require('../../assets/image/user.png')
+              }
+            />
+          </View>
+        )}
         <ListItem icon style={styles.listItem}>
           <Left>
             <Button style={styles.btnBg}>
@@ -96,7 +122,9 @@ const Settings = () => {
             </Button>
           </Left>
           <Body>
-            <Text style={styles.defText}>{I18n.t('theme')}</Text>
+            <Text style={styles.defText}>
+              {theme ? I18n.t('whiteTheme') : I18n.t('theme')}
+            </Text>
           </Body>
           <Right>
             <Switch
@@ -107,7 +135,7 @@ const Settings = () => {
             />
           </Right>
         </ListItem>
-        <ListItem icon style={styles.listItem}>
+        {/* <ListItem icon style={styles.listItem}>
           <Left>
             <Button style={{ backgroundColor: '#007AFF' }}>
               <Icon active name={secure ? 'eye-off' : 'eye'} />
@@ -124,17 +152,20 @@ const Settings = () => {
               onValueChange={(bool) => switchSecure(bool)}
             />
           </Right>
-        </ListItem>
+        </ListItem> */}
         <ListItem icon style={styles.listItem}>
-          <Left>
-            <Button style={{ backgroundColor: '#007AFF' }}>
-              <Icon active name="md-information" />
-            </Button>
-          </Left>
-          <Body>
-            <Text style={styles.defText}>{I18n.t('lang')}</Text>
-          </Body>
-          <TouchableOpacity onPress={() => setModal(true)}>
+          <TouchableOpacity
+            onPress={() => setModal(true)}
+            style={{ flexDirection: 'row' }}
+          >
+            <Left>
+              <Button style={{ backgroundColor: '#007AFF' }}>
+                <Icon active name="md-information" />
+              </Button>
+            </Left>
+            <Body>
+              <Text style={styles.defText}>{I18n.t('lang')}</Text>
+            </Body>
             <Right>
               <Text style={styles.defText2}>{lang}</Text>
               <Icon name="open" />
@@ -142,15 +173,18 @@ const Settings = () => {
           </TouchableOpacity>
         </ListItem>
         <ListItem icon style={styles.listItem}>
-          <Left>
-            <Button style={{ backgroundColor: '#beb30b' }}>
-              <Text style={styles.textIcon}>{sym}</Text>
-            </Button>
-          </Left>
-          <Body>
-            <Text style={styles.defText}>{I18n.t('cur')}</Text>
-          </Body>
-          <TouchableOpacity onPress={() => setCurrency(true)}>
+          <TouchableOpacity
+            onPress={() => setCurrency(true)}
+            style={{ flexDirection: 'row' }}
+          >
+            <Left>
+              <Button style={{ backgroundColor: '#d1c305' }}>
+                <Text style={styles.textIcon}>{sym}</Text>
+              </Button>
+            </Left>
+            <Body>
+              <Text style={styles.defText}>{I18n.t('cur')}</Text>
+            </Body>
             <Right>
               <Text style={styles.defText2}>{currenc}</Text>
               <Icon name="open" />
@@ -158,15 +192,18 @@ const Settings = () => {
           </TouchableOpacity>
         </ListItem>
         <ListItem icon style={styles.listItem}>
-          <Left>
-            <Button style={{ backgroundColor: '#01a70f' }}>
-              <Text style={styles.textIcon}>Ex</Text>
-            </Button>
-          </Left>
-          <Body>
-            <Text style={styles.defText}>{I18n.t('export')}</Text>
-          </Body>
-          <TouchableOpacity onPress={() => excelExport()}>
+          <TouchableOpacity
+            onPress={() => excelExport()}
+            style={{ flexDirection: 'row' }}
+          >
+            <Left>
+              <Button style={{ backgroundColor: '#01a70f' }}>
+                <Text style={styles.textIcon}>Ex</Text>
+              </Button>
+            </Left>
+            <Body>
+              <Text style={styles.defText}>{I18n.t('export')}</Text>
+            </Body>
             <Right>
               <Text style={styles.defText2}>{I18n.t('export1')}</Text>
               <Icon name="folder" />
@@ -174,17 +211,37 @@ const Settings = () => {
           </TouchableOpacity>
         </ListItem>
         <ListItem icon style={styles.listItem}>
-          <Left>
-            <Button style={{ backgroundColor: '#c90000' }}>
-              <Icon active name="ios-log-out" />
-            </Button>
-          </Left>
-          <Body>
-            <Text style={styles.defText}>{I18n.t('logOut')}</Text>
-          </Body>
-          <TouchableOpacity onPress={() => logOut()}>
+          <TouchableOpacity
+            onPress={() => addAcc()}
+            style={{ flexDirection: 'row' }}
+          >
+            <Left>
+              <Button style={{ backgroundColor: '#00adf1' }}>
+                <Icon active name="ios-log-in" />
+              </Button>
+            </Left>
+            <Body>
+              <Text style={styles.defText}>{I18n.t('addAcc')}</Text>
+            </Body>
             <Right>
-              <Text style={styles.defText2}>{I18n.t('logOut1')}</Text>
+              <Icon active name="arrow-forward" />
+            </Right>
+          </TouchableOpacity>
+        </ListItem>
+        <ListItem icon style={styles.listItem}>
+          <TouchableOpacity
+            onPress={() => logOut()}
+            style={{ flexDirection: 'row' }}
+          >
+            <Left>
+              <Button style={{ backgroundColor: '#c90000' }}>
+                <Icon active name="ios-log-out" />
+              </Button>
+            </Left>
+            <Body>
+              <Text style={styles.defText}>{I18n.t('remAcc')}</Text>
+            </Body>
+            <Right>
               <Icon active name="arrow-forward" />
             </Right>
           </TouchableOpacity>

@@ -29,6 +29,7 @@ const SignIn = ({}): ReactElement => {
     setUserError,
     switchSecure,
     setUserToken,
+    isFirstInit,
   } = useActions();
 
   const signInWithFacebook = async () => {
@@ -52,6 +53,8 @@ const SignIn = ({}): ReactElement => {
   const signInWithGoogle = async () => {
     const { idToken } = await GoogleSignin.signIn();
     setUserToken(idToken);
+    isFirstInit(false);
+    setUserError(null);
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
     return auth().signInWithCredential(googleCredential);
   };
@@ -86,6 +89,9 @@ const SignIn = ({}): ReactElement => {
       style={styles.wrapper}
     >
       <SafeAreaView>
+        <Text onPress={() => isFirstInit(false)} style={styles.closeAcc}>
+          &times;
+        </Text>
         <View>
           <Image
             style={styles.logo}
@@ -129,12 +135,12 @@ const SignIn = ({}): ReactElement => {
                   source={require('../../assets/image/social/google.png')}
                 />
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => signInWithFacebook()}>
+              {/* <TouchableOpacity onPress={() => signInWithFacebook()}>
                 <Image
                   style={styles.socialImg}
                   source={require('../../assets/image/social/facebook.png')}
                 />
-              </TouchableOpacity>
+              </TouchableOpacity> */}
             </View>
             <TouchableOpacity>
               <Text style={styles.forgotPass}>{I18n.t('forgotPass')}</Text>

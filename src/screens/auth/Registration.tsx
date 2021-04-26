@@ -1,5 +1,5 @@
 import { Icon, Input, Item } from 'native-base';
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import {
   SafeAreaView,
   Text,
@@ -26,7 +26,15 @@ const Registration = (): ReactElement => {
     setUserPassword,
     setUserError,
     switchSecure,
+    isFirstInit,
   } = useActions();
+
+  useEffect(() => {
+    if (signUp.user !== null) {
+      isFirstInit(false);
+      setUserError(null)
+    }
+  }, [signUp.user]);
 
   const signUpNewUser = async () => {
     if (signUp.email !== '' && signUp.password !== '') {

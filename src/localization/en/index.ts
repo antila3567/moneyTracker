@@ -89,4 +89,7 @@ export default {
   logOut: 'Log out',
   logOut1: 'exit',
   progress: 'Sorry, this feature is still under development.',
+  whiteTheme: 'White mode',
+  addAcc: 'add account',
+  remAcc: 'remove account'
 };

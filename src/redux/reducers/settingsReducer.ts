@@ -9,6 +9,7 @@ const init: ISettingState = {
   language: '',
   theme: true,
   isInit: true,
+  isAccount: false,
 };
 
 const settingReducer = (
@@ -24,6 +25,8 @@ const settingReducer = (
       return { ...state, theme: action.payload };
     case SwitchActionTypes.IS_INIT:
       return { ...state, isInit: action.payload };
+    case SwitchActionTypes.IS_ACCOUNT:
+      return { ...state, isAccount: action.payload };
     default:
       const isAllActions: never = action;
   }

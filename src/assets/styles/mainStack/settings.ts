@@ -26,6 +26,18 @@ export const lightTheme = StyleSheet.create({
     opacity: 0.6,
     color: '#000',
   },
+  infoBlock: {
+    paddingHorizontal: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 10,
+  },
+  img: {
+    width: 50,
+    height: 50,
+    borderRadius: 50,
+  },
 });
 
 export const darkTheme = StyleSheet.create({

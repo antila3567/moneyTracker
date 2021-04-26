@@ -3,12 +3,14 @@ export interface ISettingState {
   language: string;
   theme: boolean;
   isInit: boolean;
+  isAccount: boolean;
 }
 export enum SwitchActionTypes {
   SWITCH_SECURE = 'SWITCH_SECURE',
   SWITCH_LANGUAGE = 'SWITCH_LANGUAGE',
   SWITCH_THEME = 'SWITCH_THEME',
   IS_INIT = 'IS_INIT',
+  IS_ACCOUNT = 'IS_ACCOUNT',
 }
 
 interface ISwitchSecure {
@@ -28,9 +30,14 @@ interface IIsInit {
   type: SwitchActionTypes.IS_INIT;
   payload: boolean;
 }
+interface IsAccount {
+  type: SwitchActionTypes.IS_ACCOUNT;
+  payload: boolean;
+}
 
 export type ISettingActions =
   | IIsInit
   | ISwitchSecure
   | ISwitchLanguage
-  | ISwitchThemes;
+  | ISwitchThemes
+  | IsAccount;

@@ -27,6 +27,7 @@ export default () => {
   const theme = useTypedSelector((state) => state.settings.theme);
   const lang = useTypedSelector((state) => state.settings.language);
   const isInit = useTypedSelector((state) => state.settings.isInit);
+  const acc = useTypedSelector((state) => state.settings.isAccount);
   const { setInit, setUserInfo, changeLanguage } = useActions();
   const locales = RNLocalize.getLocales();
   const { i18n } = useTranslation();
@@ -65,7 +66,7 @@ export default () => {
 
   return (
     <NavigationContainer>
-      {authState.user || authState.token ? (
+      {!isInit ? (
         <Tab.Navigator
           initialRouteName="Home"
           tabBarOptions={{
@@ -136,7 +137,7 @@ export default () => {
         </Tab.Navigator>
       ) : (
         <Auth.Navigator>
-          {isInit && (
+          {isInit && !acc && (
             <Auth.Screen
               name="Onboarding"
               component={OnboardingScreen}

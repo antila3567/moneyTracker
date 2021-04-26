@@ -32,6 +32,7 @@ export enum IAuthTypes {
   SET_USER = 'SET_USER',
   SET_INIT = 'SET_INIT',
   LOG_OUT = 'LOG_OUT',
+  CLEAR_USER = 'CLEAR_USER',
 }
 
 interface ISwitchSecure {
@@ -65,6 +66,9 @@ interface ISetInit {
 interface ILogOut {
   type: IAuthTypes.LOG_OUT;
 }
+interface IClearUser {
+  type: IAuthTypes.CLEAR_USER;
+}
 
 export type IAuthActions =
   | ISwitchSecure
@@ -74,4 +78,5 @@ export type IAuthActions =
   | ISetUser
   | ISetError
   | ISetInit
-  | ILogOut;
+  | ILogOut
+  | IClearUser;

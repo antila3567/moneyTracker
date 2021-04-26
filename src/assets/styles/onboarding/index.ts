@@ -23,7 +23,7 @@ export const lightTheme = StyleSheet.create({
     marginLeft: '2.5%',
   },
   descrTitleText: {
-    fontSize: 35,
+    fontSize: 28,
     textAlign: 'center',
     fontWeight: 'bold',
     fontFamily: 'serif',
@@ -31,7 +31,7 @@ export const lightTheme = StyleSheet.create({
   descrContentText: {
     marginTop: 20,
     textAlign: 'left',
-    fontSize: 24,
+    fontSize: 18,
     color: '#707070',
     fontFamily: 'serif',
   },
@@ -66,7 +66,7 @@ export const darkTheme = StyleSheet.create({
     backgroundColor: '#000',
   },
   descrTitleText: {
-    fontSize: 35,
+    fontSize: 28,
     textAlign: 'center',
     fontWeight: 'bold',
     color: '#fff',

@@ -27,3 +27,10 @@ export const isFirstInit = (bool: boolean) => {
     payload: bool,
   };
 };
+
+export const isAccount = (bool: boolean) => {
+  return {
+    type: SwitchActionTypes.IS_ACCOUNT,
+    payload: bool,
+  };
+};

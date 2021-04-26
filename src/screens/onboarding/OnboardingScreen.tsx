@@ -29,7 +29,6 @@ const OnboardingScreen = ({}): ReactElement => {
   }, []);
 
   const goToAuth = (): void => {
-    navigation.navigate('SignIn');
     isFirstInit(false);
   };
 
