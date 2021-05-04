@@ -13,7 +13,7 @@ import { useTypedSelector } from '../../hooks/useTypedSelector';
 import I18n from 'i18next';
 import auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import { LoginManager, AccessToken } from 'react-native-fbsdk';
+// import { LoginManager, AccessToken } from 'react-native-fbsdk';
 import { useNavigation } from '@react-navigation/native';
 import { grad } from '../../assets/styles/blocks/gradient';
 import LinearGradient from 'react-native-linear-gradient';
@@ -32,23 +32,23 @@ const SignIn = ({}): ReactElement => {
     isFirstInit,
   } = useActions();
 
-  const signInWithFacebook = async () => {
-    const result = await LoginManager.logInWithPermissions([
-      'public_profile',
-      'email',
-    ]);
-    if (result.isCancelled) {
-      console.log('User cancelled the login process');
-    }
-    const data = await AccessToken.getCurrentAccessToken();
-    if (!data) {
-      console.log('Something went wrong obtaining access token');
-    }
-    const facebookCredential = auth.FacebookAuthProvider.credential(
-      data.accessToken
-    );
-    return auth().signInWithCredential(facebookCredential);
-  };
+  // const signInWithFacebook = async () => {
+  //   const result = await LoginManager.logInWithPermissions([
+  //     'public_profile',
+  //     'email',
+  //   ]);
+  //   if (result.isCancelled) {
+  //     console.log('User cancelled the login process');
+  //   }
+  //   const data = await AccessToken.getCurrentAccessToken();
+  //   if (!data) {
+  //     console.log('Something went wrong obtaining access token');
+  //   }
+  //   const facebookCredential = auth.FacebookAuthProvider.credential(
+  //     data.accessToken
+  //   );
+  //   return auth().signInWithCredential(facebookCredential);
+  // };
 
   const signInWithGoogle = async () => {
     const { idToken } = await GoogleSignin.signIn();

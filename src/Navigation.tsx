@@ -11,9 +11,9 @@ import { useActions } from './hooks/useActions';
 import { IAuthUser } from './redux/types/authTypes';
 import OnboardingScreen from './screens/onboarding/OnboardingScreen';
 import auth from '@react-native-firebase/auth';
-import AddPayBlock from './components/modals/AddPayModal';
+import AddPayBlock from './components/modals/addPayModal';
 import I18n from './localization/locale';
-import { kred } from './services/google/kred';
+import { kred } from './services/google';
 import * as RNLocalize from 'react-native-localize';
 import { useTranslation } from 'react-i18next';
 

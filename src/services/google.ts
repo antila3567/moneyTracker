@@ -1,0 +1,1 @@
+export const kred = '568283166698-kj00fldo4trvec20hsfv7p9vomtl90bv.apps.googleusercontent.com'
